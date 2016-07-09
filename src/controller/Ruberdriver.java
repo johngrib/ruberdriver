@@ -9,7 +9,7 @@ public class Ruberdriver {
 
     public static void main(String[] args) {
 
-        Config cfg = new Config().build(args);
+        Config cfg = new Config(args);
         Ruberdriver rd = new Ruberdriver(cfg);
 
     }

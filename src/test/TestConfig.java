@@ -9,12 +9,12 @@ import config.Config;
 public class TestConfig {
 
     private Config cfg;
-    private String source = "test";
+    private String source = "./ruberdriver.json";
 
     @Before
     public void setUp() {
         String[] args = { "--source", source };
-        cfg = new Config().build(args);
+        cfg = new Config(args);
     }
 
     @Test
