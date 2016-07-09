@@ -2,17 +2,14 @@ package config;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import lombok.Getter;
 import lombok.Setter;
+import util.JSONHelper;
 
 public class Config {
 
@@ -31,26 +28,15 @@ public class Config {
     public Config build(String[] args) {
 
         Config cfg = new Config();
+
         new JCommander(cfg, args);
-        cfg.setJson(getJsonObject(getAbsoluteDir(source)));
+        
+        final String location = getAbsoluteDir(source);
+        final JSONObject json = new JSONHelper().getJsonObject(location);
+
+        cfg.setJson(json);
 
         return cfg;
-    }
-
-    private JSONObject getJsonObject(final String sourceLoc) {
-
-        JSONObject jobj = null;
-        try {
-            Object obj = new JSONParser().parse(new FileReader(sourceLoc));
-            jobj = (JSONObject) obj;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return jobj;
     }
 
     private String getAbsoluteDir(final String source) {
