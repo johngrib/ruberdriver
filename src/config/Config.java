@@ -22,17 +22,19 @@ public class Config {
     @Setter
     private JSONObject json;
 
-    public Config build(String[] args) {
+    public Config(String[] args) {
 
-        Config cfg = new Config();
-        new JCommander(cfg, args);
+        new JCommander(this, args);
 
         final String location = new FileHelper().getAbsolutePath(source);
         final JSONObject json = new JSONHelper().getJsonObject(location);
 
-        cfg.setJson(json);
+        this.setJson(json);
+    }
 
-        return cfg;
+    public Config build_options(){
+
+        return this;
     }
 
 }
