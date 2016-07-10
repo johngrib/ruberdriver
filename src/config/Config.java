@@ -2,11 +2,15 @@ package config;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+
 import org.json.simple.JSONObject;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import lombok.Getter;
+import model.Item;
 import util.FileHelper;
+import util.ItemBuilder;
 import util.JSONHelper;
 
 public class Config {
@@ -22,19 +26,21 @@ public class Config {
     @Getter
     private JSONObject json;
 
+    @Getter
+    private HashMap<String, Item> items;
+
     public Config(final String[] args) {
 
         new JCommander(this, args);
 
-        final String location = new FileHelper().getAbsolutePath(source);
+        this.json = new JSONHelper().getJsonObject(getSourcePath(source));
+        this.items = new ItemBuilder().getItemMap(json);
 
-        this.json = new JSONHelper().getJsonObject(location);
-        this.build_options(this.json);
+        setChromeDriver(json);
     }
 
-    private Config build_options(JSONObject json) {
-        setChromeDriver(json);
-        return this;
+    private String getSourcePath(String source) {
+        return new FileHelper().getAbsolutePath(source);
     }
 
     private void setChromeDriver(JSONObject json) {
@@ -56,5 +62,4 @@ public class Config {
             new FileNotFoundException(error_text);
         }
     }
-
 }
