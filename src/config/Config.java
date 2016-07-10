@@ -29,12 +29,18 @@ public class Config {
     @Getter
     private HashMap<String, Item> items;
 
+    @Getter
+    private HashMap<String, Item> scenarios;
+
     public Config(final String[] args) {
 
         new JCommander(this, args);
+        
+        ItemBuilder builder = new ItemBuilder();
 
         this.json = new JSONHelper().getJsonObject(getSourcePath(source));
-        this.items = new ItemBuilder().getItemMap(json);
+        this.items = builder.getItemMap(json, Const.ITEM);
+        this.scenarios = builder.getItemMap(json, Const.SCENARIO);
 
         setChromeDriver(json);
     }
