@@ -5,9 +5,14 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 import org.json.simple.JSONObject;
+import org.openqa.selenium.WebElement;
+
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+
+import controller.CommandRegister;
 import lombok.Getter;
+import lombok.Setter;
 import model.Item;
 import util.FileHelper;
 import util.ItemBuilder;
@@ -36,12 +41,20 @@ public class Config {
     @Getter
     private HashMap<String, Item> scenarios;
 
+    @Getter
+    private CommandRegister register;
+
+    @Getter
+    @Setter
+    private WebElement lastElement;
+
     public Config(final String[] args) {
 
         new JCommander(this, args);
         
         ItemBuilder builder = new ItemBuilder();
 
+        this.register = new CommandRegister();
         this.json = new JSONHelper().getJsonObject(getSourcePath(source));
         this.items = builder.getItemMap(json, Const.ITEM);
         this.scenarios = builder.getItemMap(json, Const.SCENARIO);
