@@ -24,6 +24,10 @@ public class Config {
     private boolean async = false;
 
     @Getter
+    @Parameter(names = { "--scenario", "-c" })
+    private String runScenario = "";
+
+    @Getter
     private JSONObject json;
 
     @Getter
