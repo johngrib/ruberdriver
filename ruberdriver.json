@@ -1,0 +1,19 @@
+{
+    "chromedriver" : "./chromedriver",
+    "pics" : "~/pics/",
+    "scenario" : {
+        "go_test" : [
+            "open_chrome",
+            "goto_google",
+            "close_chrome"
+        ]
+    },
+    "item" : {
+        "open_chrome" : [ "Open chrome", "Wait 1000" ],
+        "close_chrome" : [ "Close chrome" ],
+        "goto_google" : [ 
+            "Goto http://www.google.com",
+            "Wait 3000"
+        ]
+    }
+}
