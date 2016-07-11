@@ -48,16 +48,20 @@ public class Config {
     @Setter
     private WebElement lastElement;
 
+    @Getter
+    private String picsPath;
+
     public Config(final String[] args) {
 
         new JCommander(this, args);
-        
+
         ItemBuilder builder = new ItemBuilder();
 
         this.register = new CommandRegister();
         this.json = new JSONHelper().getJsonObject(getSourcePath(source));
         this.items = builder.getItemMap(json, Const.ITEM);
         this.scenarios = builder.getItemMap(json, Const.SCENARIO);
+        this.picsPath = setPicsPath(json);
 
         setChromeDriver(json);
     }
@@ -83,6 +87,26 @@ public class Config {
             System.setProperty(driver_key, abs_path);
         } else {
             new FileNotFoundException(error_text);
+        }
+    }
+
+    private String setPicsPath(JSONObject json) { 
+
+        final String pics = "pics";
+        final String error_text = "can't found pics path \n";
+
+        if (!json.containsKey(pics)) {
+            return System.getProperty("user.home");
+        }
+
+        final String chr_path = (String) json.get(pics);
+        final String abs_path = new FileHelper().getAbsolutePath(chr_path);
+
+        if (new File(abs_path).exists()) {
+            return abs_path;
+        } else {
+            new FileNotFoundException(error_text);
+            return System.getProperty("user.home");
         }
     }
 }
