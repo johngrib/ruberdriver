@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import org.json.simple.JSONArray;
 
+import config.Const;
 import lombok.Getter;
 
 public class Item {
@@ -22,7 +23,14 @@ public class Item {
 
         for (int i = 0; i < json.size(); i++) {
             String sub = (String) json.get(i);
-            sub_items.add(sub);
+
+            if (sub.startsWith(Const.COMMENT)) {
+
+            } else if (sub.startsWith(Const.COMMENT_QUIT)) {
+                break;
+            } else {
+                sub_items.add(sub);
+            }
         }
 
         this.list = sub_items;

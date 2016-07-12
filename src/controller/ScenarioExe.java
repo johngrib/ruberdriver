@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 import command.Command;
 import config.Config;
+import config.Const;
 import model.Item;
 
 public class ScenarioExe implements Runnable {
@@ -36,7 +37,11 @@ public class ScenarioExe implements Runnable {
             LinkedList<String> user_strings = item.getList();
 
             for (String sentence : user_strings) {
-                driver = execute(sentence, driver, cfg);
+                if (sentence.startsWith(Const.COMMENT_FORCE_QUIT)) {
+                    return;
+                } else {
+                    driver = execute(sentence, driver, cfg);
+                }
             }
         }
     }
