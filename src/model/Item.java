@@ -6,6 +6,7 @@ import org.json.simple.JSONArray;
 
 import config.Const;
 import lombok.Getter;
+import lombok.Setter;
 
 public class Item {
 
@@ -15,7 +16,11 @@ public class Item {
     @Getter
     private LinkedList<String> list;
 
-    public Item(JSONArray json) {
+    @Getter
+    @Setter
+    private String name;
+
+    public Item(String name, JSONArray json) {
         super();
         this.json = json;
 
