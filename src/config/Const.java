@@ -7,4 +7,6 @@ public class Const {
     public static final String COMMENT = "#";
     public static final String COMMENT_QUIT = "$";
     public static final String COMMENT_FORCE_QUIT = "!$";
+    public static final String NAME = "name";
+    public static final String ACTION = "action";
 }

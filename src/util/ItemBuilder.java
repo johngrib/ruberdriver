@@ -4,6 +4,7 @@ import java.util.HashMap;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import config.Const;
 import model.Item;
 
 public class ItemBuilder {
@@ -17,8 +18,10 @@ public class ItemBuilder {
 
         for (Object key : keys_array) {
             String key_str = (String) key;
-            JSONArray list = (JSONArray) item_set.get(key_str);
-            items.put(key_str, new Item(list));
+            JSONObject obj = (JSONObject) item_set.get(key_str);
+            String it_name = (String) obj.get(Const.NAME);
+            JSONArray list = (JSONArray) obj.get(Const.ACTION);
+            items.put(key_str, new Item(it_name, list));
         }
 
         return items;
