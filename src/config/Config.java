@@ -32,6 +32,10 @@ public class Config {
     @Parameter(names = { "--scenario", "-c" })
     private String runScenario = "";
 
+    @Parameter(names = { "--debug", "-d" })
+    @Getter
+    private boolean debugMode = false;
+
     @Getter
     private JSONObject json;
 

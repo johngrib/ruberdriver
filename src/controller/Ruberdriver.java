@@ -31,7 +31,7 @@ public class Ruberdriver {
 
     @Test
     public void mainTest() {
-        String[] args = { "--source", "test.json", "--scenario", "purchase_test" };
+        String[] args = { "--source", "test.json", "--scenario", "purchase_test", "-d" };
         //String[] args = { "--source", "test.json", "--scenario", "login_test" };
         //String[] args = { "--scenario", "go_test" };
         Ruberdriver.main(args);
