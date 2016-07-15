@@ -17,8 +17,16 @@ public class ScenarioRunnerProto implements Scenario {
         this.cfg = cfg;
     }
 
+    protected void prepare() {
+    }
+
+    protected void end() {
+    }
+
     @Override
     public void run(Item scenario) {
+
+        this.prepare();
 
         HashMap<String, Item> items = cfg.getItems();
         LinkedList<String> scenes = scenario.getList();
@@ -30,17 +38,19 @@ public class ScenarioRunnerProto implements Scenario {
 
             for (String sentence : user_strings) {
                 if (sentence.startsWith(Const.COMMENT_FORCE_QUIT)) {
+                    this.end();
                     return;
                 } else {
                     driver = execute_sentence(sentence, driver, cfg);
                 }
             }
         }
+        this.end();
     }
 
     @Override
     public WebDriver execute_sentence(String sentence, WebDriver driver, Config cfg) {
-        System.out.println(sentence);
+        this.printScriptSentences(sentence);
 
         String function = getFunction(sentence);
         String param = getParam(sentence);
@@ -62,5 +72,11 @@ public class ScenarioRunnerProto implements Scenario {
 
     protected String getParam(String sentence) {
         return sentence.replaceFirst("^[A-Za-z]+\\s", "");
+    }
+
+    protected void printScriptSentences(String sentence) {
+        if (this.cfg.isPrintScriptSentences()) {
+            System.out.println(sentence);
+        }
     }
 }
