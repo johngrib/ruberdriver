@@ -34,6 +34,7 @@ public class Config {
 
     @Parameter(names = { "--debug", "-d" })
     @Getter
+    @Setter
     private boolean debugMode = false;
 
     @Parameter(names = { "--print", "-p" })
