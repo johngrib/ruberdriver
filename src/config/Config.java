@@ -36,6 +36,11 @@ public class Config {
     @Getter
     private boolean debugMode = false;
 
+    @Parameter(names = { "--print", "-p" })
+    @Getter
+    @Setter
+    private boolean printScriptSentences = false;
+
     @Getter
     private JSONObject json;
 
@@ -94,7 +99,7 @@ public class Config {
         }
     }
 
-    private String setPicsPath(JSONObject json) { 
+    private String setPicsPath(JSONObject json) {
 
         final String pics = "pics";
         final String error_text = "can't found pics path \n";
