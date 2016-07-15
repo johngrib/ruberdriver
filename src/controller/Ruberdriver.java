@@ -15,7 +15,6 @@ public class Ruberdriver {
         Config cfg = new Config(args);
         Ruberdriver rd = new Ruberdriver();
         rd.run(cfg);
-        System.exit(0);
     }
 
     public void run(Config cfg) {
