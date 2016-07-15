@@ -2,6 +2,7 @@ package controller;
 
 import config.Config;
 import scenario.Scenario;
+import scenario.ScenarioRunnerDebugMode;
 import scenario.ScenarioRunnerProto;
 
 public class ScenarioRunnerSelector {
@@ -12,8 +13,11 @@ public class ScenarioRunnerSelector {
         super();
         this.cfg = cfg;
     }
-    
-    public Scenario getScenarioRunner(){
+
+    public Scenario getScenarioRunner() {
+        if (this.cfg.isDebugMode()) {
+            return new ScenarioRunnerDebugMode(this.cfg);
+        }
         return new ScenarioRunnerProto(this.cfg);
     }
 
