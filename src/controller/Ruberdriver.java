@@ -1,38 +1,26 @@
 package controller;
 
-import org.junit.Test;
 import config.Config;
 import model.Item;
 import scenariorunner.ScenarioRunner;
 
-public class Ruberdriver {
+public class Ruberdriver extends Thread {
 
-    public Ruberdriver() {
+    private Config cfg;
+
+    public Ruberdriver(Config cfg) {
+        this.cfg = cfg;
     }
 
-    public static void main(String[] args) {
+    public void run() {
 
-        Config cfg = new Config(args);
-        Ruberdriver rd = new Ruberdriver();
-        rd.run(cfg);
-    }
-
-    public void run(Config cfg) {
-
-        String s_name = cfg.getRunScenario();
-        Item scenario = cfg.getScenarios().get(s_name);
+        String s_name = this.cfg.getRunScenario();
+        Item scenario = this.cfg.getScenarios().get(s_name);
 
         // https://groups.google.com/d/msg/webdriver/cw_awztl-IM/shC3BvJ0gVIJ
-        ScenarioRunner exe = new ScenarioRunnerSelector(cfg).getScenarioRunner();
+        ScenarioRunner exe = new ScenarioRunnerSelector(this.cfg).getScenarioRunner();
         exe.run(scenario);
 
     }
 
-    @Test
-    public void mainTest() {
-        String[] args = { "--source", "test.json", "--scenario", "purchase_test", "-d" };
-        //String[] args = { "--source", "test.json", "--scenario", "login_test" };
-        //String[] args = { "--scenario", "go_test" };
-        Ruberdriver.main(args);
-    }
 }
