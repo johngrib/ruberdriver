@@ -6,15 +6,21 @@ import org.openqa.selenium.WebDriver;
 import command.Command;
 import config.Config;
 import config.Const;
+import lombok.Getter;
 import model.Item;
+import model.ScenarioSubItem;
 
 public class ScenarioRunnerProto implements ScenarioRunner {
 
     private Config cfg;
 
+    @Getter
+    private ScenarioSubItem localItem;
+
     public ScenarioRunnerProto(Config cfg) {
         super();
         this.cfg = cfg;
+        this.localItem = new ScenarioSubItem();
     }
 
     protected void prepare() {
@@ -57,7 +63,7 @@ public class ScenarioRunnerProto implements ScenarioRunner {
 
         Command command = cfg.getRegister().getCommand(function);
 
-        command.prepare(driver, cfg, param);
+        command.prepare(driver, cfg, param, this);
 
         if (command.is_enable()) {
             driver = command.execute();
@@ -79,4 +85,5 @@ public class ScenarioRunnerProto implements ScenarioRunner {
             System.out.println(sentence);
         }
     }
+
 }

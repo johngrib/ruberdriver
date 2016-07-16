@@ -3,13 +3,9 @@ package config;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
-
 import org.json.simple.JSONObject;
-import org.openqa.selenium.WebElement;
-
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
-
 import controller.CommandRegister;
 import lombok.Getter;
 import lombok.Setter;
@@ -53,10 +49,6 @@ public class Config {
 
     @Getter
     private CommandRegister register;
-
-    @Getter
-    @Setter
-    private WebElement lastElement;
 
     @Getter
     private String picsPath;

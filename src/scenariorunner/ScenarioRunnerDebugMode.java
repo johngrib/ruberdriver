@@ -57,7 +57,7 @@ public class ScenarioRunnerDebugMode extends ScenarioRunnerProto {
 
         Command command = cfg.getRegister().getCommand(function);
 
-        command.prepare(driver, cfg, param);
+        command.prepare(driver, cfg, param, this);
 
         if (command.is_enable()) {
             driver = command.execute();
