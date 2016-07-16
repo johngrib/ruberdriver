@@ -3,7 +3,7 @@ package controller;
 import org.junit.Test;
 import config.Config;
 import model.Item;
-import scenario.Scenario;
+import scenariorunner.ScenarioRunner;
 
 public class Ruberdriver {
 
@@ -23,7 +23,7 @@ public class Ruberdriver {
         Item scenario = cfg.getScenarios().get(s_name);
 
         // https://groups.google.com/d/msg/webdriver/cw_awztl-IM/shC3BvJ0gVIJ
-        Scenario exe = new ScenarioRunnerSelector(cfg).getScenarioRunner();
+        ScenarioRunner exe = new ScenarioRunnerSelector(cfg).getScenarioRunner();
         exe.run(scenario);
 
     }

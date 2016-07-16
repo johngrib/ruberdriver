@@ -1,4 +1,4 @@
-package scenario;
+package scenariorunner;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -8,7 +8,7 @@ import config.Config;
 import config.Const;
 import model.Item;
 
-public class ScenarioRunnerProto implements Scenario {
+public class ScenarioRunnerProto implements ScenarioRunner {
 
     private Config cfg;
 
