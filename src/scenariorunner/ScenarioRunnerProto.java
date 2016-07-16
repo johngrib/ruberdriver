@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import command.Command;
 import config.Config;
 import config.Const;
+import controller.CommandRegister;
 import lombok.Getter;
 import model.Item;
 import model.ScenarioSubItem;
@@ -16,11 +17,13 @@ public class ScenarioRunnerProto implements ScenarioRunner {
 
     @Getter
     private ScenarioSubItem localItem;
+    protected CommandRegister register;
 
     public ScenarioRunnerProto(Config cfg) {
         super();
         this.cfg = cfg;
         this.localItem = new ScenarioSubItem();
+        this.register = new CommandRegister();
     }
 
     protected void prepare() {
@@ -61,7 +64,7 @@ public class ScenarioRunnerProto implements ScenarioRunner {
         String function = getFunction(sentence);
         String param = getParam(sentence);
 
-        Command command = cfg.getRegister().getCommand(function);
+        Command command = this.register.getCommand(function);
 
         command.prepare(driver, cfg, param, this);
 
