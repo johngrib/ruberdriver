@@ -1,9 +1,9 @@
 package controller;
 
 import config.Config;
-import scenario.Scenario;
-import scenario.ScenarioRunnerDebugMode;
-import scenario.ScenarioRunnerProto;
+import scenariorunner.ScenarioRunner;
+import scenariorunner.ScenarioRunnerDebugMode;
+import scenariorunner.ScenarioRunnerProto;
 
 public class ScenarioRunnerSelector {
 
@@ -14,7 +14,7 @@ public class ScenarioRunnerSelector {
         this.cfg = cfg;
     }
 
-    public Scenario getScenarioRunner() {
+    public ScenarioRunner getScenarioRunner() {
         if (this.cfg.isDebugMode()) {
             return new ScenarioRunnerDebugMode(this.cfg);
         }

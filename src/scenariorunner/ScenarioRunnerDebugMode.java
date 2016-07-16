@@ -1,4 +1,4 @@
-package scenario;
+package scenariorunner;
 
 import java.util.Scanner;
 
