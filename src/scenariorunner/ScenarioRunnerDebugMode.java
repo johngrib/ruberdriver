@@ -28,7 +28,7 @@ public class ScenarioRunnerDebugMode extends ScenarioRunnerProto {
 
         super.printScriptSentences(sentence);
 
-        if (cfg.isDebugMode()) {
+        if (cfg.getOption().isDebugMode()) {
             String enter = "(Enter) : execute command";
             String end = "(end) : end debug mode";
             String quit = "(quit) : force quit program";
@@ -68,7 +68,7 @@ public class ScenarioRunnerDebugMode extends ScenarioRunnerProto {
     }
 
     private void debug_end(Config cfg) {
-        cfg.setDebugMode(false);
+        cfg.getOption().disable_debugMode();
     }
 
     private void debug_quit(Config cfg) {

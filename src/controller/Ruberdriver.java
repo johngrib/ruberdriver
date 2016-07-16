@@ -14,7 +14,7 @@ public class Ruberdriver extends Thread {
 
     public void run() {
 
-        String s_name = this.cfg.getRunScenario();
+        String s_name = this.cfg.getOption().getRunScenario();
         Item scenario = this.cfg.getScenarios().get(s_name);
 
         // https://groups.google.com/d/msg/webdriver/cw_awztl-IM/shC3BvJ0gVIJ

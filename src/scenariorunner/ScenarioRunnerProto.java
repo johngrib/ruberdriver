@@ -84,7 +84,7 @@ public class ScenarioRunnerProto implements ScenarioRunner {
     }
 
     protected void printScriptSentences(String sentence) {
-        if (this.cfg.isPrintScriptSentences()) {
+        if (this.cfg.getOption().isPrintScriptSentences()) {
             System.out.println(sentence);
         }
     }

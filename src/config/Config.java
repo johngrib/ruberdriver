@@ -4,38 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import org.json.simple.JSONObject;
-import com.beust.jcommander.JCommander;
-import com.beust.jcommander.Parameter;
 import lombok.Getter;
-import lombok.Setter;
 import model.Item;
 import util.FileHelper;
 import util.ItemBuilder;
 import util.JSONHelper;
 
 public class Config {
-
-    @Getter
-    @Parameter(names = { "--source", "-s" })
-    private String source = "ruberdriver.json";
-
-    @Getter
-    @Parameter(names = { "--async", "-a" })
-    private boolean async = false;
-
-    @Getter
-    @Parameter(names = { "--scenario", "-c" })
-    private String runScenario = "";
-
-    @Parameter(names = { "--debug", "-d" })
-    @Getter
-    @Setter
-    private boolean debugMode = false;
-
-    @Parameter(names = { "--print", "-p" })
-    @Getter
-    @Setter
-    private boolean printScriptSentences = false;
 
     @Getter
     private JSONObject json;
@@ -49,16 +24,18 @@ public class Config {
     @Getter
     private String picsPath;
 
-    public Config(final String[] args) {
+    @Getter
+    private Options option;
 
-        new JCommander(this, args);
+    public Config(Options option) {
 
         ItemBuilder builder = new ItemBuilder();
 
-        this.json = new JSONHelper().getJsonObject(getSourcePath(source));
+        this.json = new JSONHelper().getJsonObject(getSourcePath(option.getSource()));
         this.items = builder.getItemMap(json, Const.ITEM);
         this.scenarios = builder.getItemMap(json, Const.SCENARIO);
         this.picsPath = setPicsPath(json);
+        this.option = option;
 
         setChromeDriver(json);
     }

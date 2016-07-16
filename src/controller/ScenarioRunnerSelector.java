@@ -15,7 +15,7 @@ public class ScenarioRunnerSelector {
     }
 
     public ScenarioRunner getScenarioRunner() {
-        if (this.cfg.isDebugMode()) {
+        if (this.cfg.getOption().isDebugMode()) {
             return new ScenarioRunnerDebugMode(this.cfg);
         }
         return new ScenarioRunnerProto(this.cfg);
