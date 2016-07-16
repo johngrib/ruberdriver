@@ -22,7 +22,7 @@ public class Find extends CommandProto {
             
             WebElement element = this.driver.findElement(by);
 
-            cfg.setLastElement(element);
+            setLastElement(element);
 
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();

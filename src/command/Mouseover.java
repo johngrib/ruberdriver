@@ -8,14 +8,13 @@ public class Mouseover extends CommandProto {
 
     @Override
     public boolean is_enable() {
-        return this.cfg.getLastElement().isDisplayed();
+        return getLastElement().isDisplayed();
     }
 
     @Override
     public WebDriver execute() {
 
-        WebElement element = cfg.getLastElement();
-        do_mouse_over(element);
+        do_mouse_over(getLastElement());
 
         return this.driver;
     }

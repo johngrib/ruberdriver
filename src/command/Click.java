@@ -8,7 +8,7 @@ public class Click extends CommandProto {
 
     @Override
     public boolean is_enable() {
-        return this.cfg.getLastElement().isEnabled();
+        return getLastElement().isEnabled();
     }
 
     @Override
@@ -16,7 +16,7 @@ public class Click extends CommandProto {
 
         int count = get_count(this.param);
 
-        WebElement element = this.cfg.getLastElement();
+        WebElement element = getLastElement();
 
         switch (count) {
         case 1:

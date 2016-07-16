@@ -6,7 +6,7 @@ public class Frame extends CommandProto {
 
     @Override
     public boolean is_enable() {
-        return this.cfg.getLastElement().isEnabled();
+        return getLastElement().isEnabled();
     }
 
     @Override
@@ -15,7 +15,7 @@ public class Frame extends CommandProto {
         if("-".equals(this.param)){
             this.driver.switchTo().defaultContent();
         } else {
-            this.driver.switchTo().frame(cfg.getLastElement());
+            this.driver.switchTo().frame(getLastElement());
         }
 
         return this.driver;
