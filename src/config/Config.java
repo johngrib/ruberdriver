@@ -6,7 +6,6 @@ import java.util.HashMap;
 import org.json.simple.JSONObject;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
-import controller.CommandRegister;
 import lombok.Getter;
 import lombok.Setter;
 import model.Item;
@@ -48,9 +47,6 @@ public class Config {
     private HashMap<String, Item> scenarios;
 
     @Getter
-    private CommandRegister register;
-
-    @Getter
     private String picsPath;
 
     public Config(final String[] args) {
@@ -59,7 +55,6 @@ public class Config {
 
         ItemBuilder builder = new ItemBuilder();
 
-        this.register = new CommandRegister();
         this.json = new JSONHelper().getJsonObject(getSourcePath(source));
         this.items = builder.getItemMap(json, Const.ITEM);
         this.scenarios = builder.getItemMap(json, Const.SCENARIO);

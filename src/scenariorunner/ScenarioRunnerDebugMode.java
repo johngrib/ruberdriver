@@ -55,7 +55,7 @@ public class ScenarioRunnerDebugMode extends ScenarioRunnerProto {
         String function = super.getFunction(sentence);
         String param = super.getParam(sentence);
 
-        Command command = cfg.getRegister().getCommand(function);
+        Command command = super.register.getCommand(function);
 
         command.prepare(driver, cfg, param, this);
 
