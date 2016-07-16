@@ -26,6 +26,10 @@ public class Options {
     @Getter
     private boolean printScriptSentences = false;
 
+    @Parameter(names = { "--all", "-l" })
+    @Getter
+    private boolean allScenario = false;
+
     public Options(final String[] args) {
 
         new JCommander(this, args);
