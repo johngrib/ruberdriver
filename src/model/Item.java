@@ -11,9 +11,6 @@ import lombok.Setter;
 public class Item {
 
     @Getter
-    private JSONArray json;
-
-    @Getter
     private LinkedList<String> list;
 
     @Getter
@@ -22,7 +19,6 @@ public class Item {
 
     public Item(String name, JSONArray json) {
         super();
-        this.json = json;
 
         LinkedList<String> sub_items = new LinkedList<>();
 
