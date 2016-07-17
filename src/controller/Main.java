@@ -20,8 +20,22 @@ public class Main {
         } else if (option.isAsync()) {
             main.runAsync(cfg, option);
         } else {
-            new Ruberdriver(cfg).run();
-            System.exit(0);
+            main.runSync(cfg, option);
+        }
+
+        main = null;
+        option = null;
+        cfg = null;
+    }
+
+    public void runSync(Config cfg, Options option) {
+        String[] scenarios = option.getScenarioArray();
+        for (String s : scenarios) {
+            String s_name = get_scenario_name(s);
+            int s_count = get_loop_count(s);
+            for (int i = 0; i < s_count; i++) {
+                new Ruberdriver(cfg, s_name).run();
+            }
         }
     }
 
@@ -121,12 +135,14 @@ public class Main {
 
     @Test
     public void mainTest() {
-        String[] args = { "--source", "test.json", "--scenario", "purchase_test,login_test", "-a" };
-        // String[] args = { "--source", "test.json", "--scenario", "purchase_test", "-a", "-l" };
-        // String[] args = { "--source", "test.json", "--scenario", "purchase_test", "-d" };
-        // String[] args = { "--source", "test.json", "--scenario", "purchase_test" };
-        // String[] args = { "--source", "test.json", "--scenario", "login_test" };
-        // String[] args = { "--scenario", "go_test" };
+        String[] args = { //
+                "--source", "test.json", //
+                //"--scenario", "purchase_test,login_test", "-a" //
+                // "--scenario", "purchase_test", "-a", "-l" //
+                // "-c", "purchase_test", "-d" //
+                // "-c", "purchase_test" //
+                 "-c", "login_test:2,purchase_test:2" //
+        };
         Main.main(args);
     }
 }
