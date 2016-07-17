@@ -2,8 +2,6 @@ package controller;
 
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import config.Config;
@@ -16,24 +14,22 @@ public class Main {
         Main main = new Main();
         Options option = new Options().build(args);
         Config cfg = new Config(option);
+        boolean isAll = option.isAllScenario();
+        Collection<String> scenarios = isAll ? cfg.getScenarios().keySet() : option.getScenarioList();
 
         if (option.isAsync()) {
-
-            boolean isAll = option.isAllScenario();
-            Collection<String> scenarios = isAll ? cfg.getScenarios().keySet() : option.getScenarioList();
             main.runAsync(cfg, option, scenarios);
-
         } else {
-            main.runSync(cfg, option);
+            main.runSync(cfg, option, scenarios);
         }
 
         main = null;
         option = null;
         cfg = null;
+        System.exit(0);
     }
 
-    public void runSync(Config cfg, Options option) {
-        List<String> scenarios = option.getScenarioList();
+    public void runSync(Config cfg, Options option, Collection<String> scenarios) {
 
         for (String s : scenarios) {
             String s_name = get_scenario_name(s);
@@ -114,7 +110,7 @@ public class Main {
     public void mainTest() {
         String[] args = { //
                 "--source", "test.json", //
-                "--scenario", "purchase_test:2,login_test", "-a" //
+                "-l"
                 //"--scenario", "purchase_test", "-a", "-l" //
                 // "-c", "purchase_test", "-d" //
                 // "-c", "purchase_test" //
