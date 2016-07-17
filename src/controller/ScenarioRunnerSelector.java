@@ -4,6 +4,7 @@ import config.Config;
 import scenariorunner.ScenarioRunner;
 import scenariorunner.ScenarioRunnerDebugMode;
 import scenariorunner.ScenarioRunnerProto;
+import scenariorunner.ScenarioRunnerSyntaxCheck;
 
 public class ScenarioRunnerSelector {
 
@@ -15,7 +16,9 @@ public class ScenarioRunnerSelector {
     }
 
     public ScenarioRunner getScenarioRunner() {
-        if (this.cfg.getOption().isDebugMode()) {
+        if (this.cfg.getOption().isSyntaxCheck()){
+            return new ScenarioRunnerSyntaxCheck(cfg);
+        } else if (this.cfg.getOption().isDebugMode()) {
             return new ScenarioRunnerDebugMode(this.cfg);
         }
         return new ScenarioRunnerProto(this.cfg);

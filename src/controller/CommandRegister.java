@@ -33,7 +33,7 @@ public class CommandRegister {
             return cmd;
 
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("none exist command : " + function);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (SecurityException e) {

@@ -40,6 +40,10 @@ public class Options {
     @Getter
     private boolean allScenario = false;
 
+    @Parameter(names = { "--syntax" })
+    @Getter
+    private boolean syntaxCheck = false;
+
     @Getter
     private List<String> scenarioList;
 

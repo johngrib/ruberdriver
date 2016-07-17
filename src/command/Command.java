@@ -14,4 +14,8 @@ public interface Command {
     public abstract WebDriver execute();
 
     public abstract boolean is_success();
+
+    public abstract String getName();
+
+    public abstract boolean is_valid_syntax();
 }

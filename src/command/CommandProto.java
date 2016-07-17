@@ -14,6 +14,15 @@ public class CommandProto implements Command {
     protected Config cfg;
     protected String param;
     protected ScenarioRunner runner;
+    private String name;
+
+    @Override
+    public String getName() {
+        if (this.name == null) {
+            this.name = this.getClass().getName().replaceFirst("[A-Za-z]+\\.", "");
+        }
+        return this.name;
+    }
 
     @Override
     public WebDriver prepare(WebDriver driver, Config cfg, String param, ScenarioRunner runner) {
@@ -39,6 +48,11 @@ public class CommandProto implements Command {
         return true;
     }
 
+    @Override
+    public boolean is_valid_syntax() {
+        return false;
+    }
+
     public ScenarioSubItem getSubItem() {
         return this.runner.getLocalItem();
     }
@@ -58,4 +72,6 @@ public class CommandProto implements Command {
     public String getParam(String sentence) {
         return sentence.replaceFirst("^[A-Za-z]+\\s", "");
     }
+
+
 }
