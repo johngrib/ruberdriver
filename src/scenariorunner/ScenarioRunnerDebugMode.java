@@ -8,12 +8,10 @@ import config.Config;
 
 public class ScenarioRunnerDebugMode extends ScenarioRunnerProto {
 
-    private Config cfg;
     private Scanner sc;
 
     public ScenarioRunnerDebugMode(Config cfg) {
         super(cfg);
-        this.cfg = cfg;
         this.sc = new Scanner(System.in);
     }
 
