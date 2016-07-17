@@ -1,10 +1,18 @@
 package config;
 
+import org.junit.Assert;
+import org.junit.Test;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import lombok.Getter;
 
 public class Options {
+
+    public Options build(final String[] args) {
+        new JCommander(this, args);
+        this.scenarioArray = parseScenarioStringToArray(this.getRunScenario());
+        return this;
+    }
 
     @Getter
     @Parameter(names = { "--source", "-s" })
@@ -30,11 +38,8 @@ public class Options {
     @Getter
     private boolean allScenario = false;
 
-    public Options(final String[] args) {
-
-        new JCommander(this, args);
-
-    }
+    @Getter
+    private String[] scenarioArray = { "" };
 
     public void disable_debugMode() {
         this.debugMode = false;
@@ -44,4 +49,18 @@ public class Options {
         this.printScriptSentences = false;
     }
 
+    private String[] parseScenarioStringToArray(String runScenario) {
+
+        String[] scenarios = runScenario.trim().split("\\s*,\\s*");
+
+        return scenarios;
+    }
+
+    @Test
+    public void testParse() {
+        String[] rs = parseScenarioStringToArray(" test, test2:3, test 4 , test 12 ,");
+        String[] expect = { "test", "test2:3", "test 4", "test 12" };
+
+        Assert.assertArrayEquals(expect, rs);
+    }
 }
