@@ -18,7 +18,7 @@ public class Options {
 
     @Getter
     @Parameter(names = { "--source", "-s" })
-    private String source = "ruberdriver.json";
+    private String source = "./ruberdriver.json";
 
     @Getter
     @Parameter(names = { "--async", "-a" })
