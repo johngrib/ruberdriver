@@ -32,12 +32,4 @@ public class Find extends CommandProto {
 
         return this.driver;
     }
-
-    protected String getFunction(String sentence) {
-        return sentence.replaceFirst("\\s.*", "");
-    }
-
-    protected String getParam(String sentence) {
-        return sentence.replaceFirst("^[A-Za-z]+\\s", "");
-    }
 }

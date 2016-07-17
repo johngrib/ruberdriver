@@ -50,4 +50,12 @@ public class CommandProto implements Command {
     public void setLastElement(WebElement element) {
         this.getSubItem().setLastElement(element);
     }
+
+    public String getFunction(String sentence) {
+        return sentence.replaceFirst("\\s.*", "");
+    }
+
+    public String getParam(String sentence) {
+        return sentence.replaceFirst("^[A-Za-z]+\\s", "");
+    }
 }
