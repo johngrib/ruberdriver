@@ -1,7 +1,9 @@
 package controller;
 
-import java.util.Iterator;
+import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import config.Config;
@@ -15,10 +17,12 @@ public class Main {
         Options option = new Options().build(args);
         Config cfg = new Config(option);
 
-        if (option.isAsync() && option.isAllScenario()) {
-            main.runAsyncAll(cfg, option);
-        } else if (option.isAsync()) {
-            main.runAsync(cfg, option);
+        if (option.isAsync()) {
+
+            boolean isAll = option.isAllScenario();
+            Collection<String> scenarios = isAll ? cfg.getScenarios().keySet() : option.getScenarioList();
+            main.runAsync(cfg, option, scenarios);
+
         } else {
             main.runSync(cfg, option);
         }
@@ -29,7 +33,8 @@ public class Main {
     }
 
     public void runSync(Config cfg, Options option) {
-        String[] scenarios = option.getScenarioArray();
+        List<String> scenarios = option.getScenarioList();
+
         for (String s : scenarios) {
             String s_name = get_scenario_name(s);
             int s_count = get_loop_count(s);
@@ -37,39 +42,12 @@ public class Main {
                 new Ruberdriver(cfg, s_name).run();
             }
         }
+        scenarios = null;
     }
 
-    public void runAsyncAll(Config cfg, Options option) {
+    public void runAsync(Config cfg, Options option, Collection<String> scenarios) {
 
         LinkedList<Thread> threads = new LinkedList<>();
-
-        Iterator<String> it = cfg.getScenarios().keySet().iterator();
-
-        while (it.hasNext()) {
-            String scenario = (String) it.next();
-
-            Thread rd = new Ruberdriver(cfg, scenario);
-            threads.add(rd);
-            rd.start();
-        }
-
-        Iterator<Thread> tit = threads.iterator();
-        try {
-            while (tit.hasNext()) {
-                Thread thread = (Thread) tit.next();
-                thread.join();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return;
-    }
-
-    public void runAsync(Config cfg, Options option) {
-
-        LinkedList<Thread> threads = new LinkedList<>();
-
-        String[] scenarios = option.getScenarioArray();
 
         for (String s : scenarios) {
 
@@ -83,15 +61,14 @@ public class Main {
             }
         }
 
-        Iterator<Thread> it = threads.iterator();
         try {
-            while (it.hasNext()) {
-                Thread thread = (Thread) it.next();
+            for (Thread thread : threads) {
                 thread.join();
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         return;
     }
 
@@ -137,11 +114,11 @@ public class Main {
     public void mainTest() {
         String[] args = { //
                 "--source", "test.json", //
-                //"--scenario", "purchase_test,login_test", "-a" //
-                // "--scenario", "purchase_test", "-a", "-l" //
+                "--scenario", "purchase_test:2,login_test", "-a" //
+                //"--scenario", "purchase_test", "-a", "-l" //
                 // "-c", "purchase_test", "-d" //
                 // "-c", "purchase_test" //
-                 "-c", "login_test:2,purchase_test:2" //
+                // "-c", "login_test:2,purchase_test:2" //
         };
         Main.main(args);
     }
