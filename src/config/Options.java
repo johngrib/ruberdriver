@@ -1,5 +1,7 @@
 package config;
 
+import java.util.Arrays;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import com.beust.jcommander.JCommander;
@@ -10,7 +12,7 @@ public class Options {
 
     public Options build(final String[] args) {
         new JCommander(this, args);
-        this.scenarioArray = parseScenarioStringToArray(this.getRunScenario());
+        this.scenarioList = parseScenarioStringToList(this.getRunScenario());
         return this;
     }
 
@@ -39,7 +41,7 @@ public class Options {
     private boolean allScenario = false;
 
     @Getter
-    private String[] scenarioArray = { "" };
+    private List<String> scenarioList;
 
     public void disable_debugMode() {
         this.debugMode = false;
@@ -49,18 +51,20 @@ public class Options {
         this.printScriptSentences = false;
     }
 
-    private String[] parseScenarioStringToArray(String runScenario) {
+    private List<String> parseScenarioStringToList(String runScenario) {
 
         String[] scenarios = runScenario.trim().split("\\s*,\\s*");
 
-        return scenarios;
+        return Arrays.asList(scenarios);
     }
 
     @Test
     public void testParse() {
-        String[] rs = parseScenarioStringToArray(" test, test2:3, test 4 , test 12 ,");
-        String[] expect = { "test", "test2:3", "test 4", "test 12" };
+        List<String> actual = parseScenarioStringToList(" test, test2:3, test 4 , test 12 ,");
 
-        Assert.assertArrayEquals(expect, rs);
+        String[] expect = { "test", "test2:3", "test 4", "test 12" };
+        List<String> expect_list = Arrays.asList(expect);
+
+        Assert.assertTrue(actual.equals(expect_list));
     }
 }
