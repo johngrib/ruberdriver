@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import command.Command;
+import command.InvalidCommand;
 
 public class CommandRegister {
 
@@ -33,7 +34,7 @@ public class CommandRegister {
             return cmd;
 
         } catch (ClassNotFoundException e) {
-            System.out.println("none exist command : " + function);
+            return new InvalidCommand();
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (SecurityException e) {
