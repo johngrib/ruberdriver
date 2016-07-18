@@ -6,8 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import checker.ParameterDefinedMethod;
 import checker.ParameterNotNull;
+import checker.ParameterSecondNotNull;
 
-public class Select extends CommandProto implements ParameterNotNull, ParameterDefinedMethod {
+public class Select extends CommandProto implements ParameterNotNull, ParameterDefinedMethod, ParameterSecondNotNull {
 
     private Set<String> param_methods;
 
