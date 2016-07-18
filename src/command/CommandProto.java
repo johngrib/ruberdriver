@@ -1,8 +1,10 @@
 package command;
 
+import java.util.Set;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Wait;
+import checker.ParameterDefinedMethod;
 import checker.ParameterNotNull;
 import checker.ParameterNumber;
 import model.ScenarioSubItem;
@@ -61,6 +63,16 @@ public class CommandProto implements Command {
         if (this instanceof ParameterNumber) {
             if (param == null || !param.trim().matches("^[1-9]\\d*$")) {
                 String msg = String.format("[%s] parameter should be number.", this.getName());
+                System.out.println(msg);
+                return false;
+            }
+        }
+        if (this instanceof ParameterDefinedMethod) {
+            Set<String> defined_methods = ((ParameterDefinedMethod) this).get_defined_param_methods();
+            String function = param.replaceFirst("\\s.*$", "");
+            if (!defined_methods.contains(function)) {
+                String msg = String.format("[%s] parameter should be in {%s}.", this.getName(),
+                        String.join(", ", defined_methods));
                 System.out.println(msg);
                 return false;
             }
