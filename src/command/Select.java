@@ -1,10 +1,15 @@
 package command;
 
+import java.util.Set;
+import java.util.TreeSet;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import checker.ParameterDefinedMethod;
 import checker.ParameterNotNull;
 
-public class Select extends CommandProto implements ParameterNotNull {
+public class Select extends CommandProto implements ParameterNotNull, ParameterDefinedMethod {
+
+    private Set<String> param_methods;
 
     @Override
     public boolean is_enable() {
@@ -35,6 +40,17 @@ public class Select extends CommandProto implements ParameterNotNull {
         }
 
         return this.driver;
+    }
+
+    @Override
+    public Set<String> get_defined_param_methods() {
+        if (this.param_methods == null) {
+            this.param_methods = new TreeSet<>();
+            this.param_methods.add("index");
+            this.param_methods.add("value");
+            this.param_methods.add("text");
+        }
+        return this.param_methods;
     }
 
 }
