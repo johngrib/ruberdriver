@@ -3,6 +3,7 @@ package command;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Wait;
+import checker.ParameterNotNull;
 import model.ScenarioSubItem;
 import scenariorunner.ScenarioRunner;
 
@@ -49,7 +50,14 @@ public class CommandProto implements Command {
 
     @Override
     public boolean is_valid_syntax() {
-        return false;
+        if (this instanceof ParameterNotNull) {
+            if (param == null || param.trim().isEmpty()) {
+                String msg = String.format("[%s] parameter should be not null.", this.getName());
+                System.out.println(msg);
+                return false;
+            }
+        }
+        return true;
     }
 
     public ScenarioSubItem getSubItem() {
