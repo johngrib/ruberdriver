@@ -1,8 +1,9 @@
 package command;
 
 import org.openqa.selenium.WebDriver;
+import checker.ParameterNumber;
 
-public class Wait extends CommandProto {
+public class Wait extends CommandProto implements ParameterNumber {
 
     @Override
     public boolean is_enable() {
