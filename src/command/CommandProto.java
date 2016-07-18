@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Wait;
 import checker.ParameterDefinedMethod;
 import checker.ParameterNotNull;
 import checker.ParameterNumber;
+import checker.ParameterSecondNotNull;
 import model.ScenarioSubItem;
 import scenariorunner.ScenarioRunner;
 
@@ -75,6 +76,15 @@ public class CommandProto implements Command {
                         String.join(", ", defined_methods));
                 System.out.println(msg);
                 return false;
+            }
+
+            if (this instanceof ParameterSecondNotNull) {
+                String second_param = param.replaceFirst("^" + function, "");
+                if (second_param.trim().isEmpty()) {
+                    String msg = String.format("[%s] second parameter should be not null.", this.getName());
+                    System.out.println(msg);
+                    return false;
+                }
             }
         }
         return true;
