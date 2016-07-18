@@ -81,7 +81,7 @@ public class ScenarioRunnerProto implements ScenarioRunner {
     }
 
     protected String getParam(String sentence) {
-        return sentence.replaceFirst("^[A-Za-z]+\\s", "");
+        return sentence.replaceFirst("^[A-Za-z]+\\s*", "");
     }
 
     protected void printScriptSentences(String sentence) {

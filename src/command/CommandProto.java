@@ -69,7 +69,7 @@ public class CommandProto implements Command {
     }
 
     public String getParam(String sentence) {
-        return sentence.replaceFirst("^[A-Za-z]+\\s", "");
+        return sentence.replaceFirst("^[A-Za-z]+\\s*", "");
     }
 
 }
