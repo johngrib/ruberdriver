@@ -1,12 +1,11 @@
 package command;
 
 import org.openqa.selenium.WebDriver;
-import config.Config;
 import scenariorunner.ScenarioRunner;
 
 public interface Command {
 
-    public abstract WebDriver prepare(WebDriver driver, Config cfg, String param, ScenarioRunner runner, String sentence);
+    public abstract WebDriver prepare(WebDriver driver, ScenarioRunner runner, String sentence, String param);
 
     public abstract boolean is_enable();
 

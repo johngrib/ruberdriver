@@ -3,7 +3,6 @@ package command;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Wait;
-import config.Config;
 import model.ScenarioSubItem;
 import scenariorunner.ScenarioRunner;
 
@@ -11,9 +10,9 @@ public class CommandProto implements Command {
 
     protected WebDriver driver;
     protected Wait<WebDriver> wait;
-    protected Config cfg;
-    protected String param;
     protected ScenarioRunner runner;
+    protected String sentence;
+    protected String param;
     private String name;
 
     @Override
@@ -25,11 +24,11 @@ public class CommandProto implements Command {
     }
 
     @Override
-    public WebDriver prepare(WebDriver driver, Config cfg, String param, ScenarioRunner runner, String sentence) {
+    public WebDriver prepare(WebDriver driver, ScenarioRunner runner, String sentence, String param) {
         this.driver = driver;
-        this.cfg = cfg;
-        this.param = param;
         this.runner = runner;
+        this.sentence = sentence;
+        this.param = param;
         return this.driver;
     }
 

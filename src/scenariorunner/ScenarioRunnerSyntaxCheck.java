@@ -30,7 +30,7 @@ public class ScenarioRunnerSyntaxCheck extends ScenarioRunnerProto {
         String param = super.getParam(sentence);
 
         Command command = super.register.getCommand(function);
-        command.prepare(driver, cfg, param, this, sentence);
+        command.prepare(driver, this, sentence, param);
 
         boolean is_valid = command.is_valid_syntax();
 

@@ -37,7 +37,7 @@ public class Printscreen extends CommandProto {
                 + ".png";
 
         try {
-            FileUtils.copyFile(scrFile, new File(this.cfg.getPicsPath() + file_name));
+            FileUtils.copyFile(scrFile, new File(this.runner.getCfg().getPicsPath() + file_name));
         } catch (IOException e) {
             e.printStackTrace();
         }
