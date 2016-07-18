@@ -2,7 +2,9 @@ package command;
 
 import org.openqa.selenium.WebDriver;
 
-public class Goto extends CommandProto {
+import checker.ParameterNotNull;
+
+public class Goto extends CommandProto implements ParameterNotNull {
 
     @Override
     public boolean is_enable() {
