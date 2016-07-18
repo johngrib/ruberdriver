@@ -2,8 +2,9 @@ package command;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import checker.ParameterNotNull;
 
-public class Select extends CommandProto {
+public class Select extends CommandProto implements ParameterNotNull {
 
     @Override
     public boolean is_enable() {
