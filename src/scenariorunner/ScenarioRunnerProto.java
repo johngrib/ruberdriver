@@ -66,7 +66,7 @@ public class ScenarioRunnerProto implements ScenarioRunner {
 
         Command command = this.register.getCommand(function);
 
-        command.prepare(driver, cfg, param, this);
+        command.prepare(driver, cfg, param, this, sentence);
 
         if (command.is_enable()) {
             driver = command.execute();

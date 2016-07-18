@@ -25,7 +25,7 @@ public class CommandProto implements Command {
     }
 
     @Override
-    public WebDriver prepare(WebDriver driver, Config cfg, String param, ScenarioRunner runner) {
+    public WebDriver prepare(WebDriver driver, Config cfg, String param, ScenarioRunner runner, String sentence) {
         this.driver = driver;
         this.cfg = cfg;
         this.param = param;
@@ -72,6 +72,5 @@ public class CommandProto implements Command {
     public String getParam(String sentence) {
         return sentence.replaceFirst("^[A-Za-z]+\\s", "");
     }
-
 
 }
