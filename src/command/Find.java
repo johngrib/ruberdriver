@@ -11,8 +11,9 @@ import org.openqa.selenium.WebElement;
 
 import checker.ParameterDefinedMethod;
 import checker.ParameterNotNull;
+import checker.ParameterSecondNotNull;
 
-public class Find extends CommandProto implements ParameterNotNull, ParameterDefinedMethod {
+public class Find extends CommandProto implements ParameterNotNull, ParameterDefinedMethod, ParameterSecondNotNull {
 
     private Set<String> param_methods;
 
