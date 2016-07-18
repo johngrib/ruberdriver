@@ -26,7 +26,6 @@ public class Main {
         main = null;
         option = null;
         cfg = null;
-        System.exit(0);
     }
 
     public void runSync(Config cfg, Options option, Collection<String> scenarios) {
@@ -106,16 +105,4 @@ public class Main {
         Assert.assertTrue("test".equals(get_scenario_name(" test: 23 ")));
     }
 
-    @Test
-    public void mainTest() {
-        String[] args = { //
-                "--source", "test.json", //
-                "-l"
-                //"--scenario", "purchase_test", "-a", "-l" //
-                // "-c", "purchase_test", "-d" //
-                // "-c", "purchase_test" //
-                // "-c", "login_test:2,purchase_test:2" //
-        };
-        Main.main(args);
-    }
 }
