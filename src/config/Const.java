@@ -2,6 +2,7 @@ package config;
 
 public class Const {
 
+    public static final String VERSION = "0.4.1.v20160719";
     public static final String ITEM = "item";
     public static final String SCENARIO = "scenario";
     public static final String COMMENT = "#";

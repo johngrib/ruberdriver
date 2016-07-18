@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import org.junit.Assert;
 import org.junit.Test;
 import config.Config;
+import config.Const;
 import config.Options;
 
 public class Main {
@@ -13,6 +14,12 @@ public class Main {
 
         Main main = new Main();
         Options option = new Options().build(args);
+
+        if (option.isShowVersion()) {
+            System.out.println(Const.VERSION);
+            System.exit(0);
+        }
+
         Config cfg = new Config(option);
         boolean isAll = option.isAllScenario();
         Collection<String> scenarios = isAll ? cfg.getScenarios().keySet() : option.getScenarioList();

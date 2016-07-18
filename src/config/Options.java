@@ -44,6 +44,10 @@ public class Options {
     @Getter
     private boolean syntaxCheck = false;
 
+    @Parameter(names = { "--version", "-v" })
+    @Getter
+    private boolean showVersion = false;
+
     @Getter
     private List<String> scenarioList;
 
