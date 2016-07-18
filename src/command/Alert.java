@@ -1,8 +1,9 @@
 package command;
 
 import org.openqa.selenium.WebDriver;
+import checker.ParameterNotNull;
 
-public class Alert extends CommandProto {
+public class Alert extends CommandProto implements ParameterNotNull {
 
     @Override
     public boolean is_enable() {
