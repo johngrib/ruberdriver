@@ -7,7 +7,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class Find extends CommandProto {
+import checker.ParameterNotNull;
+
+public class Find extends CommandProto implements ParameterNotNull {
 
     @Override
     public WebDriver execute() {
