@@ -1,9 +1,7 @@
 package model;
 
 import java.util.LinkedList;
-
 import org.json.simple.JSONArray;
-
 import config.Const;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +21,7 @@ public class Item {
         LinkedList<String> sub_items = new LinkedList<>();
 
         for (int i = 0; i < json.size(); i++) {
-            String sub = (String) json.get(i);
+            String sub = ((String) json.get(i)).trim();
 
             if (sub.startsWith(Const.COMMENT)) {
 
