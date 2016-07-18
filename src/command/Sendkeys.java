@@ -1,9 +1,9 @@
 package command;
 
-
 import org.openqa.selenium.WebDriver;
+import checker.ParameterNotNull;
 
-public class Sendkeys extends CommandProto {
+public class Sendkeys extends CommandProto implements ParameterNotNull {
 
     @Override
     public boolean is_enable() {
