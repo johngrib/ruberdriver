@@ -13,4 +13,9 @@ public class InvalidCommand extends CommandProto {
         return this.driver;
     }
 
+    @Override
+    public boolean is_valid_syntax() {
+        return false;
+    }
+
 }

@@ -34,7 +34,9 @@ public class CommandRegister {
             return cmd;
 
         } catch (ClassNotFoundException e) {
-            return new InvalidCommand();
+            Command cmd = new InvalidCommand();
+            commands.put(function, cmd);
+            return cmd;
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (SecurityException e) {

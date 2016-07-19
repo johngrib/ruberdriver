@@ -1,7 +1,7 @@
 package scenariorunner;
 
+import java.io.InputStreamReader;
 import java.util.Scanner;
-
 import org.openqa.selenium.WebDriver;
 import command.Command;
 import config.Config;
@@ -12,7 +12,7 @@ public class ScenarioRunnerSyntaxCheck extends ScenarioRunnerProto {
 
     public ScenarioRunnerSyntaxCheck(Config cfg) {
         super(cfg);
-        this.sc = new Scanner(System.in);
+        this.sc = new Scanner(new InputStreamReader(System.in));
     }
 
     @Override
@@ -35,6 +35,7 @@ public class ScenarioRunnerSyntaxCheck extends ScenarioRunnerProto {
         boolean is_valid = command.is_valid_syntax();
 
         if(!is_valid){
+            command.execute();
             System.out.println("    invalid syntax : " + sentence);
         }
 
