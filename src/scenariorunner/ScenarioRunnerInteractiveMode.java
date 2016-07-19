@@ -1,24 +1,23 @@
 package scenariorunner;
 
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 import org.openqa.selenium.WebDriver;
 import command.Command;
 import config.Config;
 
-public class ScenarioRunnerDebugMode extends ScenarioRunnerProto {
+public class ScenarioRunnerInteractiveMode extends ScenarioRunnerProto {
 
     private Scanner sc;
 
-    public ScenarioRunnerDebugMode(Config cfg) {
+    public ScenarioRunnerInteractiveMode(Config cfg) {
         super(cfg);
-        this.sc = new Scanner(System.in);
+        this.sc = new Scanner(new InputStreamReader(System.in));
     }
 
     @Override
     protected void end() {
-        this.sc.close();
-        this.sc = null;
     }
 
     @Override
@@ -26,9 +25,9 @@ public class ScenarioRunnerDebugMode extends ScenarioRunnerProto {
 
         super.printScriptSentences(sentence);
 
-        if (cfg.getOption().isDebugMode()) {
+        if (cfg.getOption().isInteractiveMode()) {
             String enter = "(Enter) : execute command";
-            String end = "(end) : end debug mode";
+            String end = "(end) : end interactive mode";
             String quit = "(quit) : force quit program";
             String msg = String.format("next command : %s\n    %s\n    %s\n    %s\n", sentence, enter, end, quit);
 
@@ -66,7 +65,7 @@ public class ScenarioRunnerDebugMode extends ScenarioRunnerProto {
     }
 
     private void debug_end(Config cfg) {
-        cfg.getOption().disable_debugMode();
+        cfg.getOption().disable_interactiveMode();
     }
 
     private void debug_quit(Config cfg) {

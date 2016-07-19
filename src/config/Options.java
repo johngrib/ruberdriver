@@ -28,9 +28,9 @@ public class Options {
     @Parameter(names = { "--scenario", "-c" })
     private String runScenario = "";
 
-    @Parameter(names = { "--debug", "-d" })
+    @Parameter(names = { "--interactive", "-i" })
     @Getter
-    private boolean debugMode = false;
+    private boolean interactiveMode = false;
 
     @Parameter(names = { "--print", "-p" })
     @Getter
@@ -51,8 +51,8 @@ public class Options {
     @Getter
     private List<String> scenarioList;
 
-    public void disable_debugMode() {
-        this.debugMode = false;
+    public void disable_interactiveMode() {
+        this.interactiveMode = false;
     }
 
     public void disable_printScriptSentences() {
