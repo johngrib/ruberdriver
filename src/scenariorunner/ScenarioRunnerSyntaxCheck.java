@@ -10,8 +10,8 @@ public class ScenarioRunnerSyntaxCheck extends ScenarioRunnerProto {
 
     private Scanner sc;
 
-    public ScenarioRunnerSyntaxCheck(Config cfg) {
-        super(cfg);
+    public ScenarioRunnerSyntaxCheck(Config cfg, String name) {
+        super(cfg, name);
         this.sc = new Scanner(new InputStreamReader(System.in));
     }
 

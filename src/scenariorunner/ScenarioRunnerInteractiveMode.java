@@ -11,8 +11,8 @@ public class ScenarioRunnerInteractiveMode extends ScenarioRunnerProto {
 
     private Scanner sc;
 
-    public ScenarioRunnerInteractiveMode(Config cfg) {
-        super(cfg);
+    public ScenarioRunnerInteractiveMode(Config cfg, String name) {
+        super(cfg, name);
         this.sc = new Scanner(new InputStreamReader(System.in));
     }
 

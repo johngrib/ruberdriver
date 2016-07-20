@@ -9,19 +9,21 @@ import scenariorunner.ScenarioRunnerSyntaxCheck;
 public class ScenarioRunnerSelector {
 
     private Config cfg;
+    private String scenario_name;
 
-    public ScenarioRunnerSelector(Config cfg) {
+    public ScenarioRunnerSelector(Config cfg, String scenario_name) {
         super();
         this.cfg = cfg;
+        this.scenario_name = scenario_name;
     }
 
     public ScenarioRunner getScenarioRunner() {
         if (this.cfg.getOption().isSyntaxCheck()){
-            return new ScenarioRunnerSyntaxCheck(cfg);
+            return new ScenarioRunnerSyntaxCheck(this.cfg, this.scenario_name);
         } else if (this.cfg.getOption().isInteractiveMode()) {
-            return new ScenarioRunnerInteractiveMode(this.cfg);
+            return new ScenarioRunnerInteractiveMode(this.cfg, this.scenario_name);
         }
-        return new ScenarioRunnerProto(this.cfg);
+        return new ScenarioRunnerProto(this.cfg, this.scenario_name);
     }
 
 }

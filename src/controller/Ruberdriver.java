@@ -23,7 +23,7 @@ public class Ruberdriver extends Thread {
         Item scenario = this.cfg.getScenarios().get(getScenarioName());
 
         // https://groups.google.com/d/msg/webdriver/cw_awztl-IM/shC3BvJ0gVIJ
-        ScenarioRunner exe = new ScenarioRunnerSelector(this.cfg).getScenarioRunner();
+        ScenarioRunner exe = new ScenarioRunnerSelector(this.cfg, this.scenario_name).getScenarioRunner();
         exe.run(scenario);
 
     }
