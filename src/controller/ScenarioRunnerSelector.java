@@ -18,9 +18,9 @@ public class ScenarioRunnerSelector {
     }
 
     public ScenarioRunner getScenarioRunner() {
-        if (this.cfg.getOption().isSyntaxCheck()){
+        if (Main.option.isSyntaxCheck()){
             return new ScenarioRunnerSyntaxCheck(this.cfg, this.scenario_name);
-        } else if (this.cfg.getOption().isInteractiveMode()) {
+        } else if (Main.option.isInteractiveMode()) {
             return new ScenarioRunnerInteractiveMode(this.cfg, this.scenario_name);
         }
         return new ScenarioRunnerProto(this.cfg, this.scenario_name);

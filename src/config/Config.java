@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import org.json.simple.JSONObject;
+import controller.Main;
 import lombok.Getter;
 import model.Item;
 import util.FileHelper;
@@ -24,18 +25,14 @@ public class Config {
     @Getter
     private String picsPath;
 
-    @Getter
-    private Options option;
-
-    public Config(Options option) {
+    public Config() {
 
         ItemBuilder builder = new ItemBuilder();
 
-        this.json = new JSONHelper().getJsonObject(getSourcePath(option.getSource()));
+        this.json = new JSONHelper().getJsonObject(getSourcePath(Main.option.getSource()));
         this.items = builder.getItemMap(json, Const.ITEM);
         this.scenarios = builder.getItemMap(json, Const.SCENARIO);
         this.picsPath = setPicsPath(json);
-        this.option = option;
 
         setChromeDriver(json);
     }

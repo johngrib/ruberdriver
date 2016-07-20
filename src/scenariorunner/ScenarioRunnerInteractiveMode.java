@@ -6,6 +6,7 @@ import java.util.Scanner;
 import org.openqa.selenium.WebDriver;
 import command.Command;
 import config.Config;
+import controller.Main;
 
 public class ScenarioRunnerInteractiveMode extends ScenarioRunnerProto {
 
@@ -25,7 +26,7 @@ public class ScenarioRunnerInteractiveMode extends ScenarioRunnerProto {
 
         super.printScriptSentences(sentence);
 
-        if (cfg.getOption().isInteractiveMode()) {
+        if (Main.option.isInteractiveMode()) {
             String enter = "(Enter) : execute command";
             String end = "(end) : end interactive mode";
             String quit = "(quit) : force quit program";
@@ -65,7 +66,7 @@ public class ScenarioRunnerInteractiveMode extends ScenarioRunnerProto {
     }
 
     private void debug_end(Config cfg) {
-        cfg.getOption().disable_interactiveMode();
+        Main.option.disable_interactiveMode();
     }
 
     private void debug_quit(Config cfg) {

@@ -33,7 +33,7 @@ public class Ruberdriver extends Thread {
         if (this.scenario_name != null) {
             return this.scenario_name;
         } else {
-            return this.cfg.getOption().getRunScenario();
+            return Main.option.getRunScenario();
         }
     }
 

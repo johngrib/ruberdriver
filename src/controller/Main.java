@@ -10,17 +10,19 @@ import config.Options;
 
 public class Main {
 
+    static public Options option = null;
+
     public static void main(String[] args) {
 
         Main main = new Main();
-        Options option = new Options().build(args);
+        option = new Options().build(args);
 
         if (option.isShowVersion()) {
             System.out.println(Const.VERSION);
             System.exit(0);
         }
 
-        Config cfg = new Config(option);
+        Config cfg = new Config();
         boolean isAll = option.isAllScenario();
         Collection<String> scenarios = isAll ? cfg.getScenarios().keySet() : option.getScenarioList();
 

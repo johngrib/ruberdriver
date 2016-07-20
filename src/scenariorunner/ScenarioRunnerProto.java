@@ -7,6 +7,7 @@ import command.Command;
 import config.Config;
 import config.Const;
 import controller.CommandRegister;
+import controller.Main;
 import lombok.Getter;
 import lombok.Setter;
 import model.Item;
@@ -90,7 +91,7 @@ public class ScenarioRunnerProto implements ScenarioRunner {
     }
 
     protected void printScriptSentences(String sentence) {
-        if (this.cfg.getOption().isPrintScriptSentences()) {
+        if (Main.option.isPrintScriptSentences()) {
             System.out.println(sentence);
         }
     }
