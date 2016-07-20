@@ -4,14 +4,13 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 import org.openqa.selenium.WebDriver;
 import command.Command;
-import config.Config;
 
 public class ScenarioRunnerSyntaxCheck extends ScenarioRunnerProto {
 
     private Scanner sc;
 
-    public ScenarioRunnerSyntaxCheck(Config cfg, String name) {
-        super(cfg, name);
+    public ScenarioRunnerSyntaxCheck(String name) {
+        super(name);
         this.sc = new Scanner(new InputStreamReader(System.in));
     }
 
@@ -22,7 +21,7 @@ public class ScenarioRunnerSyntaxCheck extends ScenarioRunnerProto {
     }
 
     @Override
-    public WebDriver execute_sentence(String sentence, WebDriver driver, Config cfg) {
+    public WebDriver execute_sentence(String sentence, WebDriver driver) {
 
         super.printScriptSentences(sentence);
 

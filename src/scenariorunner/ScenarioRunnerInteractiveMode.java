@@ -2,18 +2,16 @@ package scenariorunner;
 
 import java.io.InputStreamReader;
 import java.util.Scanner;
-
 import org.openqa.selenium.WebDriver;
 import command.Command;
-import config.Config;
 import controller.Main;
 
 public class ScenarioRunnerInteractiveMode extends ScenarioRunnerProto {
 
     private Scanner sc;
 
-    public ScenarioRunnerInteractiveMode(Config cfg, String name) {
-        super(cfg, name);
+    public ScenarioRunnerInteractiveMode(String name) {
+        super(name);
         this.sc = new Scanner(new InputStreamReader(System.in));
     }
 
@@ -22,7 +20,7 @@ public class ScenarioRunnerInteractiveMode extends ScenarioRunnerProto {
     }
 
     @Override
-    public WebDriver execute_sentence(String sentence, WebDriver driver, Config cfg) {
+    public WebDriver execute_sentence(String sentence, WebDriver driver) {
 
         super.printScriptSentences(sentence);
 
@@ -41,10 +39,10 @@ public class ScenarioRunnerInteractiveMode extends ScenarioRunnerProto {
 
             switch (input) {
             case "end":
-                this.debug_end(cfg);
+                this.debug_end();
                 break;
             case "quit":
-                this.debug_quit(cfg);
+                this.debug_quit();
             default:
                 break;
             }
@@ -65,11 +63,11 @@ public class ScenarioRunnerInteractiveMode extends ScenarioRunnerProto {
         return driver;
     }
 
-    private void debug_end(Config cfg) {
+    private void debug_end() {
         Main.option.disable_interactiveMode();
     }
 
-    private void debug_quit(Config cfg) {
+    private void debug_quit() {
         System.exit(0);
     }
 

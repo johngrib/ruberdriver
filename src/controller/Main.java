@@ -11,25 +11,26 @@ import config.Options;
 public class Main {
 
     static public Options option = null;
+    static public Config cfg = null;
 
     public static void main(String[] args) {
 
         Main main = new Main();
         option = new Options().build(args);
+        cfg = new Config();
 
         if (option.isShowVersion()) {
             System.out.println(Const.VERSION);
             System.exit(0);
         }
 
-        Config cfg = new Config();
         boolean isAll = option.isAllScenario();
         Collection<String> scenarios = isAll ? cfg.getScenarios().keySet() : option.getScenarioList();
 
         if (option.isAsync()) {
-            main.runAsync(cfg, option, scenarios);
+            main.runAsync(scenarios);
         } else {
-            main.runSync(cfg, option, scenarios);
+            main.runSync(scenarios);
         }
 
         main = null;
@@ -37,19 +38,19 @@ public class Main {
         cfg = null;
     }
 
-    public void runSync(Config cfg, Options option, Collection<String> scenarios) {
+    public void runSync(Collection<String> scenarios) {
 
         for (String s : scenarios) {
             String s_name = get_scenario_name(s);
             int s_count = get_loop_count(s);
             for (int i = 0; i < s_count; i++) {
-                new Ruberdriver(cfg, s_name).run();
+                new Ruberdriver(s_name).run();
             }
         }
         scenarios = null;
     }
 
-    public void runAsync(Config cfg, Options option, Collection<String> scenarios) {
+    public void runAsync(Collection<String> scenarios) {
 
         LinkedList<Thread> threads = new LinkedList<>();
 
@@ -59,7 +60,7 @@ public class Main {
             int s_count = get_loop_count(s);
 
             for (int i = 0; i < s_count; i++) {
-                Thread rd = new Ruberdriver(cfg, s_name);
+                Thread rd = new Ruberdriver(s_name);
                 threads.add(rd);
                 rd.start();
             }

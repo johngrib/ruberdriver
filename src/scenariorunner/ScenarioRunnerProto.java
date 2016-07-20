@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import org.openqa.selenium.WebDriver;
 import command.Command;
-import config.Config;
 import config.Const;
 import controller.CommandRegister;
 import controller.Main;
@@ -16,18 +15,14 @@ import model.ScenarioSubItem;
 public class ScenarioRunnerProto implements ScenarioRunner {
 
     @Getter
-    private Config cfg;
-
-    @Getter
     private ScenarioSubItem localItem;
     protected CommandRegister register;
 
     @Setter
     private String name;
 
-    public ScenarioRunnerProto(Config cfg, String name) {
+    public ScenarioRunnerProto(String name) {
         super();
-        this.cfg = cfg;
         this.localItem = new ScenarioSubItem();
         this.register = new CommandRegister();
         this.name = name;
@@ -44,7 +39,7 @@ public class ScenarioRunnerProto implements ScenarioRunner {
 
         this.prepare();
 
-        HashMap<String, Item> items = cfg.getItems();
+        HashMap<String, Item> items = Main.cfg.getItems();
         LinkedList<String> scenes = scenario.getList();
         WebDriver driver = null;
 
@@ -57,7 +52,7 @@ public class ScenarioRunnerProto implements ScenarioRunner {
                     this.end();
                     return;
                 } else {
-                    driver = execute_sentence(sentence, driver, cfg);
+                    driver = execute_sentence(sentence, driver);
                 }
             }
         }
@@ -65,7 +60,7 @@ public class ScenarioRunnerProto implements ScenarioRunner {
     }
 
     @Override
-    public WebDriver execute_sentence(String sentence, WebDriver driver, Config cfg) {
+    public WebDriver execute_sentence(String sentence, WebDriver driver) {
         this.printScriptSentences(sentence);
 
         String function = getFunction(sentence);
