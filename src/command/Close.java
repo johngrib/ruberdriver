@@ -11,7 +11,7 @@ public class Close extends CommandProto {
 
     @Override
     public WebDriver execute() {
-        this.driver.quit();
+        this.driver.close();
         this.driver = null;
         return null;
     }
