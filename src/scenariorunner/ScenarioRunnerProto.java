@@ -8,7 +8,6 @@ import config.Const;
 import controller.CommandRegister;
 import controller.Main;
 import lombok.Getter;
-import lombok.Setter;
 import model.Item;
 import model.ScenarioSubItem;
 
@@ -18,7 +17,7 @@ public class ScenarioRunnerProto implements ScenarioRunner {
     private ScenarioSubItem localItem;
     protected CommandRegister register;
 
-    @Setter
+    @Getter
     private String name;
 
     public ScenarioRunnerProto(String name) {

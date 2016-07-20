@@ -11,4 +11,5 @@ public interface ScenarioRunner {
 
     public ScenarioSubItem getLocalItem();
 
+    public String getName();
 }
