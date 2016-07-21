@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class WebDriverManager {
@@ -52,17 +53,24 @@ public class WebDriverManager {
     public void quitDriver(String key) {
         WebDriver driver = drivers.get(key);
         if (driver != null) {
-            driver.quit();
+            try {
+                driver.quit();
+            } catch (UnreachableBrowserException e) {
+                // quited driver.
+            }
         }
         putDriver(key, null);
     }
 
     public void claosAllDrivers() {
         Collection<WebDriver> drv = drivers.values();
-        for (WebDriver webDriver : drv) {
-            if(webDriver != null){
-                System.out.println("close :: " + webDriver);
-                webDriver.quit();
+        for (WebDriver driver : drv) {
+            if (driver != null) {
+                try {
+                    driver.close();
+                } catch (UnreachableBrowserException e) {
+                    // closed driver.
+                }
             }
         }
     }

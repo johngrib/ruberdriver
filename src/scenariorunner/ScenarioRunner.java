@@ -14,4 +14,6 @@ public interface ScenarioRunner {
     public String getName();
 
     public String getDriverKey();
+
+    public void stop();
 }

@@ -14,6 +14,7 @@ public class Quit extends CommandProto {
     @Override
     public WebDriver execute() {
         String key = this.runner.getDriverKey();
+        System.out.println("Quit web browser " + runner.getName());
         Main.driverManager.quitDriver(key);
         return null;
     }

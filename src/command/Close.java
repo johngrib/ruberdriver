@@ -14,6 +14,7 @@ public class Close extends CommandProto {
     @Override
     public WebDriver execute() {
         String key = this.runner.getDriverKey();
+        System.out.println("Close web browser " + runner.getName());
         Main.driverManager.closeDriver(key);
         return null;
     }
