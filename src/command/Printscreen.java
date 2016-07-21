@@ -19,22 +19,11 @@ public class Printscreen extends CommandProto {
     }
 
     public void getscreenshot() {
+
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
         LocalDate today = LocalDate.now();
-
-        int year = today.getYear();
-        int month = today.getMonthValue();
-        int day = today.getDayOfMonth();
-
         LocalTime time = LocalTime.now();
-        int hour = time.getHour();
-        int min = time.getMinute();
-        int sec = time.getSecond();
-        int nano = time.getNano();
-
-        String file_name = year + "." + month + "." + day + "_" + hour + "h." + min + "m." + sec + "s." + nano + "n"
-                + ".png";
+        String file_name = String.format("%s_%s_%s.png", today.toString(), time.toString(), runner.getName().trim());
 
         try {
             FileUtils.copyFile(scrFile, new File(Main.cfg.getPicsPath() + file_name));
