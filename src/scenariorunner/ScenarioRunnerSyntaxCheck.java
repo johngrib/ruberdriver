@@ -1,23 +1,12 @@
 package scenariorunner;
 
-import java.io.InputStreamReader;
-import java.util.Scanner;
 import org.openqa.selenium.WebDriver;
 import command.Command;
 
 public class ScenarioRunnerSyntaxCheck extends ScenarioRunnerProto {
 
-    private Scanner sc;
-
     public ScenarioRunnerSyntaxCheck(String name) {
         super(name);
-        this.sc = new Scanner(new InputStreamReader(System.in));
-    }
-
-    @Override
-    protected void end() {
-        this.sc.close();
-        this.sc = null;
     }
 
     @Override
