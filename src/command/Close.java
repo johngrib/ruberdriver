@@ -2,6 +2,8 @@ package command;
 
 import org.openqa.selenium.WebDriver;
 
+import controller.Main;
+
 public class Close extends CommandProto {
 
     @Override
@@ -11,8 +13,8 @@ public class Close extends CommandProto {
 
     @Override
     public WebDriver execute() {
-        this.driver.close();
-        this.driver = null;
+        String key = this.runner.getDriverKey();
+        Main.driverManager.closeDriver(key);
         return null;
     }
 

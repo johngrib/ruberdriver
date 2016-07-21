@@ -1,5 +1,7 @@
 package scenariorunner;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.LinkedList;
 import org.openqa.selenium.WebDriver;
@@ -20,11 +22,20 @@ public class ScenarioRunnerProto implements ScenarioRunner {
     @Getter
     private String name;
 
+    @Getter
+    private String driverKey;
+
     public ScenarioRunnerProto(String name) {
         super();
         this.localItem = new ScenarioSubItem();
         this.register = new CommandRegister();
         this.name = name;
+
+        LocalDate today = LocalDate.now();
+        LocalTime time = LocalTime.now();
+
+        this.driverKey = name + "-" + today + "-" + time + "-" + this.hashCode();
+
     }
 
     protected void prepare() {

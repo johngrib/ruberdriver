@@ -2,6 +2,8 @@ package command;
 
 import org.openqa.selenium.WebDriver;
 
+import controller.Main;
+
 public class Quit extends CommandProto {
 
     @Override
@@ -11,8 +13,8 @@ public class Quit extends CommandProto {
 
     @Override
     public WebDriver execute() {
-        this.driver.quit();
-        this.driver = null;
+        String key = this.runner.getDriverKey();
+        Main.driverManager.quitDriver(key);
         return null;
     }
 

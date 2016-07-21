@@ -3,11 +3,9 @@ package command;
 import java.util.Set;
 import java.util.TreeSet;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import checker.ParameterDefinedMethod;
+import controller.Main;
 
 public class Open extends CommandProto implements ParameterDefinedMethod {
 
@@ -21,21 +19,22 @@ public class Open extends CommandProto implements ParameterDefinedMethod {
     @Override
     public WebDriver execute() {
 
+        String key = this.runner.getDriverKey();
         switch (this.param) {
         case "chrome":
-            this.driver = new ChromeDriver();
+            this.driver = Main.driverManager.getNewChromeDriver(key);
             break;
         case "safari":
-            this.driver = new SafariDriver();
+            this.driver = Main.driverManager.getNewSafariDriver(key);
             break;
         case "firefox":
-            this.driver = new FirefoxDriver();
+            this.driver = Main.driverManager.getNewFireFoxDriver(key);
             break;
         default:
-            this.driver = new ChromeDriver();
+            this.driver = Main.driverManager.getNewChromeDriver(key);
             break;
         }
-        
+
         this.wait = new WebDriverWait(this.driver, 30);
         return this.driver;
     }

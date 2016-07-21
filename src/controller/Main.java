@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
 import config.Config;
 import config.Const;
 import config.Options;
@@ -12,6 +13,7 @@ public class Main {
 
     static public Options option = null;
     static public Config cfg = null;
+    static public WebDriverManager driverManager = new WebDriverManager();
 
     public static void main(String[] args) {
 
@@ -36,6 +38,16 @@ public class Main {
         main = null;
         option = null;
         cfg = null;
+
+        System.out.println("========================");
+        System.out.println("========================");
+        Collection<String> keys = driverManager.getDriverList();
+        for (String s : keys) {
+            WebDriver driver = driverManager.getDriver(s);
+            if(driver != null){
+                System.out.println(s + " : not closed");
+            }
+        }
     }
 
     public void runSync(Collection<String> scenarios) {
