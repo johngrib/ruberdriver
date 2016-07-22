@@ -4,11 +4,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Set;
 import java.util.TreeSet;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import checker.ParameterDefinedMethod;
 import checker.ParameterNotNull;
 import checker.ParameterSecondNotNull;
@@ -27,11 +25,17 @@ public class Find extends CommandProto implements ParameterNotNull, ParameterDef
 
             Method method = By.class.getMethod(function, String.class);
             By by = (By) method.invoke(By.class, query);
-            
+
             WebElement element = this.driver.findElement(by);
-
             setLastElement(element);
+            return driver;
 
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            System.out.println("---Find ERROR---");
+            System.out.println(String.format("Invalid query : [%s]", this.sentence));
+            String msg = e.getMessage().replaceAll("^", "    ");
+            System.out.println(msg);
+            System.out.println("----------------");
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException | SecurityException e) {

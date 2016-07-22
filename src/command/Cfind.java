@@ -22,6 +22,12 @@ public class Cfind extends Find {
             WebElement element = getLastElement().findElement(by);
             setLastElement(element);
 
+        } catch (org.openqa.selenium.NoSuchElementException e){
+            System.out.println("---Cfind ERROR---");
+            System.out.println(String.format("Invalid query : [%s]", this.sentence));
+            String msg = e.getMessage().replaceAll("^", "    ");
+            System.out.println(msg);
+            System.out.println("----------------");
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException | SecurityException e) {

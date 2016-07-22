@@ -5,8 +5,6 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.LinkedList;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-
 import command.Command;
 import config.Const;
 import controller.CommandRegister;
@@ -64,7 +62,6 @@ public class ScenarioRunnerProto implements ScenarioRunner {
         LinkedList<String> scenes = scenario.getList();
         WebDriver driver = null;
 
-        loopScenes: //
         for (String s : scenes) {
             Item item = items.get(s);
             LinkedList<String> user_strings = item.getList();
@@ -74,12 +71,7 @@ public class ScenarioRunnerProto implements ScenarioRunner {
                     this.end();
                     return;
                 } else {
-                    try {
-                        driver = execute_sentence(sentence, driver);
-                    } catch (WebDriverException e) {
-                        System.out.println("WebDriver closed by force - " + getDriverKey());
-                        break loopScenes;
-                    }
+                    driver = execute_sentence(sentence, driver);
                 }
             }
         }
