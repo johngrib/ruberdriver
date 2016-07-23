@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import org.openqa.selenium.By;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import checker.ParameterDefinedMethod;
@@ -34,6 +35,12 @@ public class Find extends CommandProto implements ParameterNotNull, ParameterDef
         } catch (org.openqa.selenium.NoSuchElementException e) {
             System.out.println("---Find ERROR---");
             System.out.println(String.format("Invalid query : [%s]", this.sentence));
+            String msg = e.getMessage().replaceAll("^", "    ");
+            System.out.println(msg);
+            System.out.println("----------------");
+            runner.getLogger().log(Level.SEVERE, msg);
+        } catch (UnhandledAlertException e) {
+            System.out.println("---Alert ERROR---");
             String msg = e.getMessage().replaceAll("^", "    ");
             System.out.println(msg);
             System.out.println("----------------");
