@@ -1,5 +1,7 @@
 package scenariorunner;
 
+import java.util.logging.Logger;
+
 import org.openqa.selenium.WebDriver;
 import model.Item;
 import model.ScenarioSubItem;
@@ -16,4 +18,6 @@ public interface ScenarioRunner {
     public String getDriverKey();
 
     public void stop();
+
+    public Logger getLogger();
 }

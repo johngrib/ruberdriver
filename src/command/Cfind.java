@@ -2,6 +2,7 @@ package command;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.logging.Level;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,6 +29,7 @@ public class Cfind extends Find {
             String msg = e.getMessage().replaceAll("^", "    ");
             System.out.println(msg);
             System.out.println("----------------");
+            runner.getLogger().log(Level.SEVERE, msg);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException | SecurityException e) {
