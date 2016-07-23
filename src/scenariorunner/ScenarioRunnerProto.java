@@ -35,6 +35,10 @@ public class ScenarioRunnerProto implements ScenarioRunner {
     @Getter
     private Logger logger;
 
+    private int sceneMax = 0;
+
+    private int sceneCnt = 0;
+
     public ScenarioRunnerProto(String name) {
         super();
         this.localItem = new ScenarioSubItem();
@@ -67,6 +71,24 @@ public class ScenarioRunnerProto implements ScenarioRunner {
         this.isRun = false;
     }
 
+    @Override
+    public String getProgressString() {
+        String progress = String.format("%04d/%04d", this.sceneCnt, this.sceneMax);
+        return progress;
+    }
+
+    @Override
+    public String getFinishStatusString() {
+        String is_pass = (this.sceneCnt == this.sceneMax) ? "SUCCESS" : "FAILED";
+        String progress = String.format("%s %04d/%04d", is_pass, this.sceneCnt, this.sceneMax);
+        return progress;
+    }
+
+    @Override
+    public boolean isPassed() {
+        return this.sceneCnt == this.sceneMax;
+    }
+
     protected void prepare() {
     }
 
@@ -82,6 +104,10 @@ public class ScenarioRunnerProto implements ScenarioRunner {
         LinkedList<String> scenes = scenario.getList();
         WebDriver driver = null;
 
+        this.sceneCnt = 0;
+        this.sceneMax = getSenteceCnt(scenario);
+
+        logger.log(Level.INFO, "STARTED " + this.getDriverKey());
         for (String s : scenes) {
             Item item = items.get(s);
             LinkedList<String> user_strings = item.getList();
@@ -91,7 +117,8 @@ public class ScenarioRunnerProto implements ScenarioRunner {
                     this.end();
                     return;
                 } else {
-                    logger.info(sentence);
+                    this.sceneCnt++;
+                    logger.log(Level.INFO, this.getProgressString() + " " + sentence);
                     driver = execute_sentence(sentence, driver);
                 }
             }
@@ -99,9 +126,21 @@ public class ScenarioRunnerProto implements ScenarioRunner {
         this.end();
     }
 
+    private int getSenteceCnt(Item scenario) {
+        HashMap<String, Item> items = Main.cfg.getItems();
+        LinkedList<String> scenes = scenario.getList();
+
+        int cnt = 0;
+
+        for (String s : scenes) {
+            Item item = items.get(s);
+            cnt += item.getList().size();
+        }
+        return cnt;
+    }
+
     @Override
     public WebDriver execute_sentence(String sentence, WebDriver driver) {
-        this.printScriptSentences(sentence);
 
         String function = getFunction(sentence);
         String param = getParam(sentence);
@@ -123,12 +162,6 @@ public class ScenarioRunnerProto implements ScenarioRunner {
 
     protected String getParam(String sentence) {
         return sentence.replaceFirst("^[A-Za-z]+\\s*", "");
-    }
-
-    protected void printScriptSentences(String sentence) {
-        if (Main.option.isPrintScriptSentences()) {
-            System.out.println(sentence);
-        }
     }
 
 }

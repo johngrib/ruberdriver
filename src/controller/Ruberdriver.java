@@ -19,6 +19,7 @@ public class Ruberdriver extends Thread {
 
         // https://groups.google.com/d/msg/webdriver/cw_awztl-IM/shC3BvJ0gVIJ
         ScenarioRunner exe = new ScenarioRunnerSelector(scenario).getScenarioRunner();
+        Main.runnerManager.put(exe.getDriverKey(), exe);
         exe.run(scenario);
 
     }

@@ -12,8 +12,6 @@ public class ScenarioRunnerSyntaxCheck extends ScenarioRunnerProto {
     @Override
     public WebDriver execute_sentence(String sentence, WebDriver driver) {
 
-        super.printScriptSentences(sentence);
-
         String function = super.getFunction(sentence);
         String param = super.getParam(sentence);
 

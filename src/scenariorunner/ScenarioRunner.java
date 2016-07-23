@@ -20,4 +20,10 @@ public interface ScenarioRunner {
     public void stop();
 
     public Logger getLogger();
+
+    public String getProgressString();
+
+    public String getFinishStatusString();
+
+    public boolean isPassed();
 }

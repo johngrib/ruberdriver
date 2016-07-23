@@ -22,8 +22,6 @@ public class ScenarioRunnerInteractiveMode extends ScenarioRunnerProto {
     @Override
     public WebDriver execute_sentence(String sentence, WebDriver driver) {
 
-        super.printScriptSentences(sentence);
-
         if (Main.option.isInteractiveMode()) {
             String enter = "(Enter) : execute command";
             String end = "(end) : end interactive mode";

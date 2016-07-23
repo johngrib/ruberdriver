@@ -13,7 +13,11 @@ public class RuberDriverLoggerFormatter extends Formatter {
 
     public synchronized String format(LogRecord record) {
 
-        String message = formatMessage(record);
+        String date = LocalDate.now().toString();
+        String time = LocalTime.now().toString();
+        String type = record.getLevel().getName();
+        String msg = formatMessage(record);
+
         String throwable = "";
         if (record.getThrown() != null) {
             StringWriter sw = new StringWriter();
@@ -23,11 +27,7 @@ public class RuberDriverLoggerFormatter extends Formatter {
             pw.close();
             throwable = sw.toString();
         }
-        return String.format(format, //
-                LocalDate.now().toString(), //
-                LocalTime.now().toString(), //
-                record.getLevel().getName() + " : " + record.getLevel().getLocalizedName(), //
-                message, //
-                throwable);
+
+        return String.format(format, date, time, type, msg, throwable);
     }
 }

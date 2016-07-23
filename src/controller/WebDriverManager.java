@@ -42,6 +42,10 @@ public class WebDriverManager {
         return drivers.keySet();
     }
 
+    public Collection<WebDriver> getDrivers(){
+        return drivers.values();
+    }
+
     public void closeDriver(String key) {
         WebDriver driver = drivers.get(key);
         if (driver != null) {

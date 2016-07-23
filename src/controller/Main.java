@@ -1,25 +1,38 @@
 package controller;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import config.Config;
 import config.Const;
 import config.Options;
+import scenariorunner.ScenarioRunner;
+import util.RuberDriverLoggerFormatter;
 
 public class Main {
 
     static public Options option = null;
     static public Config cfg = null;
     static public WebDriverManager driverManager = new WebDriverManager();
+    static public HashMap<String, ScenarioRunner> runnerManager = new HashMap<>();
+    static public Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static void main(String[] args) {
 
         Main main = new Main();
         option = new Options().build(args);
         cfg = new Config();
+        main.setLogger();
+        logger.log(Level.INFO, "INITIATED RUBERDRIVER");
 
         if (option.isShowVersion()) {
             System.out.println(Const.VERSION);
@@ -40,13 +53,32 @@ public class Main {
         cfg = null;
 
         System.out.println("========================");
-        System.out.println("========================");
         Collection<String> keys = driverManager.getDriverList();
-        for (String s : keys) {
-            WebDriver driver = driverManager.getDriver(s);
-            if(driver != null){
-                System.out.println(s + " : not closed");
+        for (String key : keys) {
+            WebDriver driver = driverManager.getDriver(key);
+            if (driver != null) {
+                logger.log(Level.WARNING, "NOT CLOSED : " + key);
             }
+        }
+        System.out.println("========================");
+        for (ScenarioRunner runner : runnerManager.values()) {
+            String msg = runner.getFinishStatusString() + " " + runner.getDriverKey();
+            runner.getLogger().log(Level.INFO, msg);
+            logger.log(Level.INFO, msg);
+        }
+        logger.log(Level.INFO, "QUIT RUBERDRIVER");
+    }
+
+    public void setLogger() {
+        logger.setLevel(Level.ALL);
+        try {
+            String date = LocalDate.now().toString();
+            String time = LocalTime.now().toString();
+            FileHandler fileTxt = new FileHandler(Main.cfg.getLogPath() + "/ruberdriver--" + date + "--" + time + ".log");
+            fileTxt.setFormatter(new RuberDriverLoggerFormatter());
+            logger.addHandler(fileTxt);
+        } catch (SecurityException | IOException e) {
+            e.printStackTrace();
         }
     }
 
