@@ -1,9 +1,13 @@
 package scenariorunner;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.openqa.selenium.WebDriver;
 import command.Command;
 import config.Const;
@@ -12,6 +16,7 @@ import controller.Main;
 import lombok.Getter;
 import model.Item;
 import model.ScenarioSubItem;
+import util.RuberDriverLoggerFormatter;
 
 public class ScenarioRunnerProto implements ScenarioRunner {
 
@@ -27,6 +32,9 @@ public class ScenarioRunnerProto implements ScenarioRunner {
 
     private boolean isRun;
 
+    @Getter
+    private Logger logger;
+
     public ScenarioRunnerProto(String name) {
         super();
         this.localItem = new ScenarioSubItem();
@@ -37,9 +45,21 @@ public class ScenarioRunnerProto implements ScenarioRunner {
         LocalDate today = LocalDate.now();
         LocalTime time = LocalTime.now();
 
-        this.driverKey = name + "-" + today + "-" + time + "-" + this.hashCode();
+        this.driverKey = String.format("[%s]--%s--%s--%s", name, today, time, this.hashCode());
 
         Runtime.getRuntime().addShutdownHook(new controller.Shutdown(this));
+
+        logger = Logger.getLogger(this.driverKey);
+
+        try {
+            logger.setLevel(Level.ALL);
+            FileHandler fileTxt = new FileHandler(Main.cfg.getLogPath() + "/" + this.driverKey + ".log");
+            fileTxt.setFormatter(new RuberDriverLoggerFormatter());
+            logger.addHandler(fileTxt);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -71,6 +91,7 @@ public class ScenarioRunnerProto implements ScenarioRunner {
                     this.end();
                     return;
                 } else {
+                    logger.info(sentence);
                     driver = execute_sentence(sentence, driver);
                 }
             }

@@ -25,6 +25,9 @@ public class Config {
     @Getter
     private String picsPath;
 
+    @Getter
+    private String logPath;
+
     public Config() {
 
         ItemBuilder builder = new ItemBuilder();
@@ -33,6 +36,7 @@ public class Config {
         this.items = builder.getItemMap(json, Const.ITEM);
         this.scenarios = builder.getItemMap(json, Const.SCENARIO);
         this.picsPath = setPicsPath(json);
+        this.logPath = setLogPath(json);
 
         setChromeDriver(json);
     }
@@ -79,5 +83,28 @@ public class Config {
             new FileNotFoundException(error_text);
             return System.getProperty("user.home");
         }
+    }
+
+    private String setLogPath(JSONObject json) {
+
+        final String path = "log_path";
+
+        if (!json.containsKey(path)) {
+            String new_path = "./ruberdriver_log/";
+            File new_dir = new File(new_path);
+            if (!new_dir.exists()) {
+                new_dir.mkdirs();
+            }
+            return new_path;
+        }
+
+        final String chr_path = (String) json.get(path);
+        final String abs_path = new FileHelper().getAbsolutePath(chr_path) + "/";
+        File new_dir = new File(abs_path);
+
+        if (!new_dir.exists()) {
+            new_dir.mkdirs();
+        }
+            return abs_path;
     }
 }

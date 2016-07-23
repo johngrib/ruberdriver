@@ -1,5 +1,6 @@
 package controller;
 
+import model.Item;
 import scenariorunner.ScenarioRunner;
 import scenariorunner.ScenarioRunnerInteractiveMode;
 import scenariorunner.ScenarioRunnerProto;
@@ -7,21 +8,21 @@ import scenariorunner.ScenarioRunnerSyntaxCheck;
 
 public class ScenarioRunnerSelector {
 
-    private String scenario_name;
+    private Item scenario;
 
-    public ScenarioRunnerSelector(String scenario_name) {
+    public ScenarioRunnerSelector(Item scenario) {
         super();
-        this.scenario_name = scenario_name;
+        this.scenario = scenario;
     }
 
     public ScenarioRunner getScenarioRunner() {
 
         if (Main.option.isSyntaxCheck()){
-            return new ScenarioRunnerSyntaxCheck(this.scenario_name);
+            return new ScenarioRunnerSyntaxCheck(this.scenario.getName());
         } else if (Main.option.isInteractiveMode()) {
-            return new ScenarioRunnerInteractiveMode(this.scenario_name);
+            return new ScenarioRunnerInteractiveMode(this.scenario.getName());
         }
-        return new ScenarioRunnerProto(this.scenario_name);
+        return new ScenarioRunnerProto(this.scenario.getName());
     }
 
 }

@@ -13,10 +13,12 @@ public class Ruberdriver extends Thread {
 
     public void run() {
 
-        Item scenario = Main.cfg.getScenarios().get(getScenarioName());
+        String s_name = getScenarioName();
+        Item scenario = Main.cfg.getScenarios().get(s_name);
+        scenario.setName(s_name);
 
         // https://groups.google.com/d/msg/webdriver/cw_awztl-IM/shC3BvJ0gVIJ
-        ScenarioRunner exe = new ScenarioRunnerSelector(this.scenario_name).getScenarioRunner();
+        ScenarioRunner exe = new ScenarioRunnerSelector(scenario).getScenarioRunner();
         exe.run(scenario);
 
     }

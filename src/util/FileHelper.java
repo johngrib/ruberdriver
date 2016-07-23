@@ -1,7 +1,5 @@
 package util;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,27 +7,17 @@ public class FileHelper {
 
     public String getAbsolutePath(final String source) {
 
-        String location;
-
         if (source.startsWith("~/")) {
-            location = applyHomePath(source);
-        } else if (source.startsWith("./")) {
-            location = applyWorkPath(source);
-        } else {
-            location = source;
+            return applyHomePath(source);
         }
 
-        if (!new File(location).exists()) {
-            new FileNotFoundException("can't found file : " + source);
-        }
-
-        return location;
+        return source;
     }
 
     @Test
     public void testGetAbsolutePath() {
         String actual = getAbsolutePath("./pom.xml");
-        String expect = System.getProperty("user.dir") + "/pom.xml";
+        String expect = "./pom.xml";
         Assert.assertEquals("getSourceDir", actual, expect);
 
         String actual1 = getAbsolutePath("~/.bash_profile");
