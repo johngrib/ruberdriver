@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import checker.ParameterDefinedMethod;
 import checker.ParameterNotNull;
 import checker.ParameterSecondNotNull;
+import controller.Main;
 
 public class Find extends CommandProto implements ParameterNotNull, ParameterDefinedMethod, ParameterSecondNotNull {
 
@@ -48,9 +49,12 @@ public class Find extends CommandProto implements ParameterNotNull, ParameterDef
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException | SecurityException e) {
-            e.printStackTrace();
+            if (!Main.option.isSyntaxCheck()) {
+                super.is_valid_syntax();
+            }
         }
 
+        runner.stop();
         return this.driver;
     }
 

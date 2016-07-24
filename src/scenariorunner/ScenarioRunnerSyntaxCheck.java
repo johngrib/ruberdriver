@@ -1,5 +1,7 @@
 package scenariorunner;
 
+import java.util.logging.Level;
+
 import org.openqa.selenium.WebDriver;
 import command.Command;
 
@@ -22,7 +24,8 @@ public class ScenarioRunnerSyntaxCheck extends ScenarioRunnerProto {
 
         if(!is_valid){
             command.execute();
-            System.out.println("    invalid syntax : " + sentence);
+            String msg = "invalid syntax : " + sentence;
+            getLogger().log(Level.SEVERE, msg);
         }
 
         return driver;

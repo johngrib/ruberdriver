@@ -1,6 +1,8 @@
 package command;
 
 import java.util.Set;
+import java.util.logging.Level;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Wait;
@@ -57,14 +59,14 @@ public class CommandProto implements Command {
         if (this instanceof ParameterNotNull) {
             if (param == null || param.trim().isEmpty()) {
                 String msg = String.format("[%s] parameter should be not null.", this.getName());
-                System.out.println(msg);
+                runner.getLogger().log(Level.SEVERE, msg);
                 return false;
             }
         }
         if (this instanceof ParameterNumber) {
             if (param == null || !param.trim().matches("^[1-9]\\d*$")) {
                 String msg = String.format("[%s] parameter should be number.", this.getName());
-                System.out.println(msg);
+                runner.getLogger().log(Level.SEVERE, msg);
                 return false;
             }
         }
@@ -74,7 +76,7 @@ public class CommandProto implements Command {
             if (!defined_methods.contains(function)) {
                 String msg = String.format("[%s] parameter should be in {%s}.", this.getName(),
                         String.join(", ", defined_methods));
-                System.out.println(msg);
+                runner.getLogger().log(Level.SEVERE, msg);
                 return false;
             }
 
@@ -82,7 +84,7 @@ public class CommandProto implements Command {
                 String second_param = param.replaceFirst("^" + function, "");
                 if (second_param.trim().isEmpty()) {
                     String msg = String.format("[%s] second parameter should be not null.", this.getName());
-                    System.out.println(msg);
+                    runner.getLogger().log(Level.SEVERE, msg);
                     return false;
                 }
             }
