@@ -48,6 +48,10 @@ public class Options {
     @Getter
     private boolean showVersion = false;
 
+    @Parameter(names = { "--debug", "-d" })
+    @Getter
+    private boolean debugMode = false;
+
     @Getter
     private List<String> scenarioList;
 

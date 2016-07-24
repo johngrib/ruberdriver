@@ -20,6 +20,10 @@ public class Find extends CommandProto implements ParameterNotNull, ParameterDef
 
     @Override
     public WebDriver execute() {
+        return execute("Find");
+    }
+
+    protected WebDriver execute(String function_name) {
 
         String function = getFunction(this.param);
         String query = getParam(this.param);
@@ -29,32 +33,47 @@ public class Find extends CommandProto implements ParameterNotNull, ParameterDef
             Method method = By.class.getMethod(function, String.class);
             By by = (By) method.invoke(By.class, query);
 
-            WebElement element = this.driver.findElement(by);
+            WebElement element = null;
+
+            if ("Find".equals(function_name)) {
+                element = this.driver.findElement(by);
+            } else if ("Cfind".equals(function_name)) {
+                element = getLastElement().findElement(by);
+            }
+
             setLastElement(element);
             return driver;
 
         } catch (org.openqa.selenium.NoSuchElementException e) {
-            System.out.println("---Find ERROR---");
+            System.out.println(String.format("---%s ERROR---", function_name));
             System.out.println(String.format("Invalid query : [%s]", this.sentence));
             String msg = e.getMessage().replaceAll("^", "    ");
             System.out.println(msg);
             System.out.println("----------------");
             runner.getLogger().log(Level.SEVERE, msg);
+            if (Main.option.isDebugMode())
+                e.printStackTrace();
         } catch (UnhandledAlertException e) {
             System.out.println("---Alert ERROR---");
             String msg = e.getMessage().replaceAll("^", "    ");
             System.out.println(msg);
             System.out.println("----------------");
             runner.getLogger().log(Level.SEVERE, msg);
+            if (Main.option.isDebugMode())
+                e.printStackTrace();
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException | SecurityException e) {
             if (!Main.option.isSyntaxCheck()) {
                 super.is_valid_syntax();
             }
+            if (Main.option.isDebugMode())
+                e.printStackTrace();
         }
 
-        runner.stop();
+        if (!Main.option.isSyntaxCheck()) {
+            runner.stop();
+        }
         return this.driver;
     }
 

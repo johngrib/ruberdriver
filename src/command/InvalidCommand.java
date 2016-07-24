@@ -1,5 +1,6 @@
 package command;
 
+import java.util.logging.Level;
 import org.openqa.selenium.WebDriver;
 
 public class InvalidCommand extends CommandProto {
@@ -8,7 +9,7 @@ public class InvalidCommand extends CommandProto {
     public WebDriver execute() {
 
         String msg = String.format("[%s] is invalid command.", this.getFunction(sentence));
-        System.out.println(msg);
+        runner.getLogger().log(Level.SEVERE, msg);
 
         return this.driver;
     }

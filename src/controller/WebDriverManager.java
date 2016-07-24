@@ -42,7 +42,7 @@ public class WebDriverManager {
         return drivers.keySet();
     }
 
-    public Collection<WebDriver> getDrivers(){
+    public Collection<WebDriver> getDrivers() {
         return drivers.values();
     }
 
@@ -56,11 +56,12 @@ public class WebDriverManager {
 
     public void quitDriver(String key) {
         WebDriver driver = drivers.get(key);
-        if (driver != null) {
+        if (driver != null && !driver.toString().matches("\\(null\\)\\s*$")) {
             try {
                 driver.quit();
             } catch (UnreachableBrowserException e) {
-                // quited driver.
+                if (Main.option.isDebugMode())
+                    e.printStackTrace();
             }
         }
         putDriver(key, null);
@@ -69,11 +70,12 @@ public class WebDriverManager {
     public void claosAllDrivers() {
         Collection<WebDriver> drv = drivers.values();
         for (WebDriver driver : drv) {
-            if (driver != null) {
+            if (driver != null && !driver.toString().matches("\\(null\\)\\s*$")) {
                 try {
                     driver.close();
                 } catch (UnreachableBrowserException e) {
-                    // closed driver.
+                    if (Main.option.isDebugMode())
+                        e.printStackTrace();
                 }
             }
         }
