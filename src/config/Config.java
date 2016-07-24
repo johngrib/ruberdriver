@@ -35,8 +35,8 @@ public class Config {
         this.json = new JSONHelper().getJsonObject(getSourcePath(Main.option.getSource()));
         this.items = builder.getItemMap(json, Const.ITEM);
         this.scenarios = builder.getItemMap(json, Const.SCENARIO);
-        this.picsPath = setPicsPath(json);
-        this.logPath = setLogPath(json);
+        this.picsPath = createPath(json, "pics", "./ruberdriver_pics/");
+        this.logPath = createPath(json, "log_path", "./ruberdriver_log/");
 
         setChromeDriver(json);
     }
@@ -65,32 +65,9 @@ public class Config {
         }
     }
 
-    private String setPicsPath(JSONObject json) {
-
-        final String pics = "pics";
-        final String error_text = "can't found pics path \n";
-
-        if (!json.containsKey(pics)) {
-            return System.getProperty("user.home");
-        }
-
-        final String chr_path = (String) json.get(pics);
-        final String abs_path = new FileHelper().getAbsolutePath(chr_path);
-
-        if (new File(abs_path).exists()) {
-            return abs_path;
-        } else {
-            new FileNotFoundException(error_text);
-            return System.getProperty("user.home");
-        }
-    }
-
-    private String setLogPath(JSONObject json) {
-
-        final String path = "log_path";
+    private String createPath(JSONObject json, String path, String new_path) {
 
         if (!json.containsKey(path)) {
-            String new_path = "./ruberdriver_log/";
             File new_dir = new File(new_path);
             if (!new_dir.exists()) {
                 new_dir.mkdirs();
@@ -105,6 +82,6 @@ public class Config {
         if (!new_dir.exists()) {
             new_dir.mkdirs();
         }
-            return abs_path;
+        return abs_path;
     }
 }
