@@ -9,7 +9,14 @@ import java.util.logging.LogRecord;
 
 public class RuberDriverLoggerFormatter extends Formatter {
 
-    private final String format = "%s %s [%s] %s%s\n";
+    private String format = "%s %s [%s] %s%s\n";
+
+    public RuberDriverLoggerFormatter() {
+    }
+
+    public RuberDriverLoggerFormatter(String format) {
+        this.format = format;
+    }
 
     public synchronized String format(LogRecord record) {
 
@@ -28,6 +35,7 @@ public class RuberDriverLoggerFormatter extends Formatter {
             throwable = sw.toString();
         }
 
-        return String.format(format, date, time, type, msg, throwable);
+        String log = String.format(this.format, date, time, type, msg, throwable);
+        return log;
     }
 }

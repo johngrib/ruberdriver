@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,10 +49,42 @@ public class Main {
             main.runSync(scenarios);
         }
 
-        main = null;
-        option = null;
-        cfg = null;
+        main.printRunnerStatus();
 
+        int notClosed = main.getNotClosedDriversCount();
+
+        if (notClosed > 0) {
+            main.printNotClosedDrivers();
+            System.out.println("^C to close all.");
+        } else {
+            logger.log(Level.INFO, "CLOSING RUBERDRIVER...");
+            System.exit(0);
+        }
+    }
+
+    public int getNotClosedDriversCount() {
+        System.out.println("========================");
+        int cnt = 0;
+        Collection<String> keys = driverManager.getDriverList();
+        for (String key : keys) {
+            WebDriver driver = driverManager.getDriver(key);
+            if (driver != null) {
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+
+    public void printRunnerStatus() {
+        System.out.println("========================");
+        for (ScenarioRunner runner : runnerManager.values()) {
+            String msg = runner.getFinishStatusString() + " " + runner.getDriverKey();
+            runner.getLogger().log(Level.INFO, msg);
+            logger.log(Level.INFO, msg);
+        }
+    }
+
+    public void printNotClosedDrivers() {
         System.out.println("========================");
         Collection<String> keys = driverManager.getDriverList();
         for (String key : keys) {
@@ -60,13 +93,6 @@ public class Main {
                 logger.log(Level.WARNING, "NOT CLOSED : " + key);
             }
         }
-        System.out.println("========================");
-        for (ScenarioRunner runner : runnerManager.values()) {
-            String msg = runner.getFinishStatusString() + " " + runner.getDriverKey();
-            runner.getLogger().log(Level.INFO, msg);
-            logger.log(Level.INFO, msg);
-        }
-        logger.log(Level.INFO, "QUIT RUBERDRIVER");
     }
 
     public void setLogger() {
@@ -74,9 +100,14 @@ public class Main {
         try {
             String date = LocalDate.now().toString();
             String time = LocalTime.now().toString();
-            FileHandler fileTxt = new FileHandler(Main.cfg.getLogPath() + "/ruberdriver--" + date + "--" + time + ".log");
+            String form =  Main.cfg.getLogPath() + "/ruberdriver--" + date + "--" + time + ".log";
+            FileHandler fileTxt = new FileHandler(form);
             fileTxt.setFormatter(new RuberDriverLoggerFormatter());
+            ConsoleHandler conTxt = new ConsoleHandler();
+            conTxt.setFormatter(new RuberDriverLoggerFormatter(""));
             logger.addHandler(fileTxt);
+            //logger.addHandler(conTxt);
+            logger.setUseParentHandlers(false);
         } catch (SecurityException | IOException e) {
             e.printStackTrace();
         }

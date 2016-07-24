@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,9 +58,17 @@ public class ScenarioRunnerProto implements ScenarioRunner {
 
         try {
             logger.setLevel(Level.ALL);
+
             FileHandler fileTxt = new FileHandler(Main.cfg.getLogPath() + "/" + this.driverKey + ".log");
+            ConsoleHandler conTxt = new ConsoleHandler();
+
             fileTxt.setFormatter(new RuberDriverLoggerFormatter());
+            conTxt.setFormatter(new RuberDriverLoggerFormatter());
+
             logger.addHandler(fileTxt);
+            logger.addHandler(conTxt);
+            logger.setUseParentHandlers(false);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

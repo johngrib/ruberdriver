@@ -15,14 +15,14 @@ public class Shutdown extends Thread {
 
         String key = runner.getDriverKey();
         String msg = runner.getFinishStatusString() + " " + key;
+        String closed = "CLOSED WebDriver : " + key;
 
         runner.getLogger().log(Level.INFO, msg);
         Main.logger.log(Level.INFO, msg);
-        runner.stop();
 
+        runner.stop();
         Main.driverManager.quitDriver(key);
 
-        String closed = "FORCE CLOSED WebDriver : " + key;
         runner.getLogger().log(Level.INFO, closed);
         Main.logger.log(Level.INFO, closed);
     }
