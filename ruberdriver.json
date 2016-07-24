@@ -1,19 +1,186 @@
 {
     "chromedriver" : "./chromedriver",
     "pics" : "~/pics/",
+    "log_path" : "~/ruber_logs/",
     "scenario" : {
-        "go_test" : [
-            "open_chrome",
-            "goto_google",
-            "close_chrome"
-        ]
+        "go_test" : {
+            "name" : "google search",
+            "action" : [
+                "open_chrome",
+                "goto_google",
+                "search_google_ruberdriver",
+                "close_chrome",
+            ]
+        },
+        "get_heart" : {
+            "name" : "get heart curve",
+            "action" : [
+                "open_chrome",
+                "goto_google",
+                "search_heart_curve",
+                "close_chrome",
+            ]
+        },
+        "select_test" : {
+            "name" : "select command test scenario",
+            "action" : [
+                "select_test",
+                "close_chrome",
+            ]
+        },
+        "alert_test" : {
+            "name" : "alert test scenario",
+            "action" : [
+                "alert_test",
+                "close_chrome",
+            ]
+        },
+        "bf_test" : {
+            "name" : "baeminfresh test",
+            "action" : [
+                "bf_test",
+                "select_turing_c_s",
+                "detail_select_second_option",
+                "detail_add_product",
+                "detail_select_purchase_once",
+                "click_goto_cart",
+            ]
+        }
     },
     "item" : {
-        "open_chrome" : [ "Open chrome", "Wait 1000" ],
-        "close_chrome" : [ "Close chrome" ],
-        "goto_google" : [ 
-            "Goto http://www.google.com",
-            "Wait 3000"
-        ]
+        "open_chrome" : {
+            "name" : "open chrome",
+            "action" : [ "Open chrome", "Wait 1000" ],
+        }
+        "close_chrome" : {
+            "name" : "close chrome",
+            "action" : [ "Close chrome" ],
+        },
+        "goto_google" : {
+            "name" : "goto google",
+            "action" : [
+                "Goto http://www.google.com",
+                "Wait 500"
+            ]
+        },
+        "search_google_ruberdriver" : {
+            "name" : "search google",
+            "action" : [
+                "Find id lst-ib",
+                "Sendkeys ruberdriver",
+                "Sendkey ENTER",
+                "Wait 1000"
+                "Find linkText Commits · johngrib/ruberdriver · GitHub"
+                "Click 1",
+                "Find linkText ruberdriver",
+                "Click 1",
+                "Wait 5000"
+            ]
+        },
+        "search_heart_curve" : {
+            "name" : "search heart",
+            "action" : [
+                "Find id lst-ib",
+                "Sendkeys wolfram alpha",
+                "Sendkey ENTER",
+                "Wait 2000",
+                "Find linkText Wolfram|Alpha: Computational Knowledge Engine",
+                "Click 1",
+                "Find cssSelector #query",
+                "Click 1",
+                "Sendkeys first heart curve",
+                "Sendkey ENTER",
+                "Wait 10000",
+                "Printscreen"
+            ]
+        },
+        "select_test" : {
+            "name" : "select box test",
+            "action" : [
+                "Open chrome",
+                "Wait 1000",
+                "Goto http://www.w3schools.com/tags/tryit.asp?filename=tryhtml_select",
+                "Find cssSelector #iframeResult",
+                "Frame"
+                "Find cssSelector body > select",
+                "Select text Audi",
+            ]
+        },
+        "alert_test" : {
+            "name" : "alert handling test",
+            "action" : [
+                "Open chrome",
+                "Wait 1000",
+                "Goto http://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_alert",
+                "Find xpath //*[@id='iframeResult']",
+                "Frame",
+                "Find cssSelector body > button",
+                "Click 1",
+                "Wait 2000",
+                "Alert accept"
+            ]
+        },
+        "bf_test" : {
+            "name" : "baeminfresh test",
+            "action" : [
+                "Open chrome",
+                "Wait 2000",
+                "Goto https://www.baeminfresh.com",
+            ]
+        },
+        "select_turing_c_s" : {
+            "name" : "츄링 클렌즈 스무디 선택",
+            "action" : [
+                "Echo 츄링 클렌즈 스무디 선택",
+                "Maximize",
+                "Find id gnb-beverage",
+                "Mouseover",
+                "Cfind linkText 신선주스",
+                "Click 1",
+                "Find linkText 츄링 클렌즈스무디",
+                "Click 1"
+            ]
+        },
+        "detail_select_second_option" : {
+            "name" : "(상품상세) 구성선택 2번째",
+            "action" : [
+                "Echo (상품상세) 구성선택 2번째",
+                "Find cssSelector div.selectric",
+                "Click 1",
+                "Find cssSelector div.selectric-items > div > ul > li:nth-child(2)",
+                "Click 1",
+            ]
+        },
+        "detail_add_product" : {
+            "name" : "(상품상세) 상품 추가",
+            "action" : [
+                "Echo (상품상세) 상품 추가",
+                "Find cssSelector form > fieldset > p.option_add > button",
+                "Click 1",
+            ]
+        },
+        "detail_select_purchase_once" : {
+            "name" : "(상품상세) 배송받는 날 선택 -> 1회 구매 선택",
+            "action" : [
+                "Echo (상품상세) 배송받는 날 선택 -> 1회 구매 선택",
+                "Find cssSelector form > fieldset > button",
+                "Click 1",
+                "Wait 1000",
+                "Find cssSelector #receipt-date-selector iframe",
+                "Frame 1",
+                "Find cssSelector body > div.popup_content_wrap.clearfix > div.delivery_info_box > div.w1 > ul > li:nth-child(1)",
+                "Click 1",
+            ]
+        },
+        "click_goto_cart" : {
+            "name" : "(배송주기/수령일 선택) 장바구니 담기 클릭",
+            "action" : [
+                "Echo (배송주기/수령일 선택) 장바구니 담기 클릭",
+                "Find cssSelector #price-info-box > div.btn_area > button",
+                "Click 1",
+                "Wait 2000",
+                "Alert accept",
+            ]
+        },
     }
 }

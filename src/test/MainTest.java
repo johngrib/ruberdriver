@@ -9,7 +9,7 @@ public class MainTest {
     @Test
     public void mainTest() {
         String[] args = { //
-                "--source", "test.json", //
+                "--source", "ruberdriver.json", //
                 "-l", "-a"
                 //"--scenario", "purchase_test", "-a", "-l" //
                 // "-c", "purchase_test", "-d" //
