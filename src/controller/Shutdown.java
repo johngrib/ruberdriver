@@ -3,6 +3,11 @@ package controller;
 import java.util.logging.Level;
 import scenariorunner.ScenarioRunner;
 
+/**
+ * ^C interrupt 발생시 사용할 Closing Thread.
+ * @author johngrib
+ *
+ */
 public class Shutdown extends Thread {
 
     private ScenarioRunner runner;

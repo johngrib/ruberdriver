@@ -8,6 +8,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.openqa.selenium.safari.SafariDriver;
 
+/**
+ * 여러 scenario runner 가 사용하는 WebDriver 를 관리한다.
+ * @author johngrib
+ */
 public class WebDriverManager {
 
     private HashMap<String, WebDriver> drivers = new HashMap<>();

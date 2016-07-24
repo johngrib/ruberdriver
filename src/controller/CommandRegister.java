@@ -6,6 +6,11 @@ import java.util.HashMap;
 import command.Command;
 import command.InvalidCommand;
 
+/**
+ * script command 에 해당하는 command package 의 class 를 보관한다.
+ * 
+ * @author johngrib
+ */
 public class CommandRegister {
 
     private HashMap<String, Command> commands;

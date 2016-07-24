@@ -6,6 +6,11 @@ import scenariorunner.ScenarioRunnerInteractiveMode;
 import scenariorunner.ScenarioRunnerProto;
 import scenariorunner.ScenarioRunnerSyntaxCheck;
 
+/**
+ * 사용자의 option 에 맞는 Scenario runner 를 선택해 준다.
+ * @author johngrib
+ *
+ */
 public class ScenarioRunnerSelector {
 
     private Item scenario;
