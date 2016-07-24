@@ -55,6 +55,9 @@ public class Main {
 
         if (notClosed > 0) {
             main.printNotClosedDrivers();
+            if (option.isAutoQuit()) {
+                System.exit(0);
+            }
             System.out.println("^C to close all.");
         } else {
             logger.log(Level.INFO, "CLOSING RUBERDRIVER...");

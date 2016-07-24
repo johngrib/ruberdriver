@@ -52,6 +52,10 @@ public class Options {
     @Getter
     private boolean debugMode = false;
 
+    @Parameter(names = { "--autoquit", "--autoclose", "-q" })
+    @Getter
+    private boolean autoQuit = false;
+
     @Getter
     private List<String> scenarioList;
 
