@@ -54,6 +54,11 @@ public class ScenarioRunnerProto implements ScenarioRunner {
 
         Runtime.getRuntime().addShutdownHook(new controller.Shutdown(this));
 
+        setLogger();
+
+    }
+
+    private void setLogger() {
         logger = Logger.getLogger(this.driverKey);
 
         try {
@@ -72,7 +77,6 @@ public class ScenarioRunnerProto implements ScenarioRunner {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -119,6 +123,7 @@ public class ScenarioRunnerProto implements ScenarioRunner {
         logger.log(Level.INFO, "SOURCE JSON : " + Main.option.getSource());
         logger.log(Level.INFO, "EXE OPTIONS : " + String.join(" ", Main.option.getArgs()));
         logger.log(Level.INFO, "STARTED " + this.getDriverKey());
+
         for (String s : scenes) {
             Item item = items.get(s);
             LinkedList<String> user_strings = item.getList();
