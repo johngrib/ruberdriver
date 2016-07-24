@@ -33,6 +33,8 @@ public class Main {
         option = new Options().build(args);
         cfg = new Config();
         main.setLogger();
+        logger.log(Level.INFO, "SOURCE JSON : " + option.getSource());
+        logger.log(Level.INFO, "EXE OPTIONS : " + String.join(" ", option.getArgs()));
         logger.log(Level.INFO, "INITIATED RUBERDRIVER");
 
         if (option.isShowVersion()) {

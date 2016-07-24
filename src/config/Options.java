@@ -12,9 +12,13 @@ public class Options {
 
     public Options build(final String[] args) {
         new JCommander(this, args);
+        this.args = args;
         this.scenarioList = parseScenarioStringToList(this.getRunScenario());
         return this;
     }
+
+    @Getter
+    private String[] args;
 
     @Getter
     @Parameter(names = { "--source", "-s" })

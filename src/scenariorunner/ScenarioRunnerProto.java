@@ -116,6 +116,8 @@ public class ScenarioRunnerProto implements ScenarioRunner {
         this.sceneCnt = 0;
         this.sceneMax = getSenteceCnt(scenario);
 
+        logger.log(Level.INFO, "SOURCE JSON : " + Main.option.getSource());
+        logger.log(Level.INFO, "EXE OPTIONS : " + String.join(" ", Main.option.getArgs()));
         logger.log(Level.INFO, "STARTED " + this.getDriverKey());
         for (String s : scenes) {
             Item item = items.get(s);
