@@ -51,7 +51,7 @@
         "open_chrome" : {
             "name" : "open chrome",
             "action" : [ "Open chrome", "Wait 1000" ],
-        }
+        },
         "close_chrome" : {
             "name" : "close chrome",
             "action" : [ "Close chrome" ],
@@ -69,8 +69,8 @@
                 "Find id lst-ib",
                 "Sendkeys ruberdriver",
                 "Sendkey ENTER",
-                "Wait 1000"
-                "Find linkText Commits · johngrib/ruberdriver · GitHub"
+                "Wait 1000",
+                "Find linkText Commits · johngrib/ruberdriver · GitHub",
                 "Click 1",
                 "Find linkText ruberdriver",
                 "Click 1",
