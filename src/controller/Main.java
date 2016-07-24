@@ -100,13 +100,13 @@ public class Main {
         try {
             String date = LocalDate.now().toString();
             String time = LocalTime.now().toString();
-            String form =  Main.cfg.getLogPath() + "/ruberdriver--" + date + "--" + time + ".log";
+            String form = Main.cfg.getLogPath() + "/ruberdriver--" + date + "--" + time + ".log";
             FileHandler fileTxt = new FileHandler(form);
             fileTxt.setFormatter(new RuberDriverLoggerFormatter());
             ConsoleHandler conTxt = new ConsoleHandler();
             conTxt.setFormatter(new RuberDriverLoggerFormatter(""));
             logger.addHandler(fileTxt);
-            //logger.addHandler(conTxt);
+            // logger.addHandler(conTxt);
             logger.setUseParentHandlers(false);
         } catch (SecurityException | IOException e) {
             e.printStackTrace();
