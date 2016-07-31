@@ -246,6 +246,21 @@
     "Sendkeys johngrib82@gamil",
     "Sendkey ENTER",
     ```
+* Forward
+    * 웹 브라우저의 '앞으로' 명령을 입력합니다.
+    ```
+    "Forward",
+    ```
+* Back
+    * 웹 브라우저의 '뒤로' 명령을 입력합니다.
+    ```
+    "Back",
+    ```
+* Refresh
+    * 웹 브라우저의 '새로고침' 명령을 입력합니다.
+    ```
+    "Refresh",
+    ```
 
 #### Options
 * --source, -s
